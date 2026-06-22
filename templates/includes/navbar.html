@@ -1,0 +1,194 @@
+{% load static %}
+
+<!-- Floating Glassmorphic Navbar -->
+<nav class="fixed top-4 left-1/2 -translate-x-1/2 w-[92%] max-w-7xl z-50 bg-[#070B34]/85 backdrop-blur-lg border border-purple-500/20 rounded-2xl shadow-xl transition-all duration-300">
+    <div class="px-5 md:px-8">
+        <div class="flex justify-between items-center h-[72px] md:h-20">
+            <!-- Logo -->
+            <a href="{% url 'home' %}" class="flex items-center gap-3 min-w-0">
+                <img src="{% static 'images/logo.png' %}" alt="Onion Techs" class="w-10 h-10 md:w-12 md:h-12 flex-shrink-0">
+                <div class="min-w-0">
+                    <h1 class="text-white text-lg md:text-xl font-bold tracking-tight leading-none truncate">Onion Techs</h1>
+                    <p class="text-[9px] md:text-[10px] text-purple-300 font-medium uppercase tracking-wider truncate">Technology Network</p>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-8">
+                <a href="{% url 'home' %}" class="nav-link text-sm text-gray-300 hover:text-white transition-colors duration-200 {% if request.resolver_match.url_name == 'home' %}text-white font-semibold{% endif %}">Home</a>
+                <a href="{% url 'about' %}" class="nav-link text-sm text-gray-300 hover:text-white transition-colors duration-200 {% if request.resolver_match.url_name == 'about' %}text-white font-semibold{% endif %}">About</a>
+                <a href="{% url 'services' %}" class="nav-link text-sm text-gray-300 hover:text-white transition-colors duration-200 {% if request.resolver_match.url_name == 'services' %}text-white font-semibold{% endif %}">Services</a>
+                <a href="{% url 'home' %}#technologies" class="nav-link text-sm text-gray-300 hover:text-white transition-colors duration-200">Technologies</a>
+                <a href="{% url 'team' %}" class="nav-link text-sm text-gray-300 hover:text-white transition-colors duration-200 {% if request.resolver_match.url_name == 'team' %}text-white font-semibold{% endif %}">Team</a>
+                <a href="{% url 'home' %}#contact-cta" class="nav-link text-sm text-gray-300 hover:text-white transition-colors duration-200">Contact</a>
+                <a href="{% url 'join_us' %}" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold text-sm hover:scale-[1.05] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-purple-500/20">Join Us</a>
+            </div>
+
+            <!-- Mobile Menu Open Trigger Button (hamburger -> X morph) -->
+            <button id="mobile-menu-open" class="lg:hidden text-white p-2 focus:outline-none flex-shrink-0" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobile-menu-drawer">
+                <div class="burger"><span></span><span></span><span></span></div>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Full-Screen Backdrop Overlay -->
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] hidden"></div>
+
+<!-- Slide-in Drawer Menu -->
+<div id="mobile-menu-drawer" class="fixed top-0 right-0 h-full w-[82%] max-w-[380px] bg-[#070B34] z-[70] shadow-2xl flex flex-col border-l border-purple-500/10 hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <!-- Drawer Header -->
+    <div class="flex justify-between items-center px-7 py-6 border-b border-purple-500/10">
+        <a href="{% url 'home' %}" class="flex items-center gap-2 min-w-0">
+            <img src="{% static 'images/logo.png' %}" alt="Onion Techs" class="w-9 h-9 flex-shrink-0">
+            <span class="text-white font-bold text-base truncate">Onion Techs</span>
+        </a>
+        <button id="mobile-menu-close" class="text-white text-2xl p-2 focus:outline-none flex-shrink-0" aria-label="Close navigation menu">✕</button>
+    </div>
+
+    <!-- Drawer Content Links -->
+    <div class="flex flex-col gap-1 px-7 py-8 flex-grow overflow-y-auto">
+        <a href="{% url 'home' %}" class="drawer-link text-lg font-medium py-3 border-b border-purple-500/5 {% if request.resolver_match.url_name == 'home' %}text-white font-semibold{% else %}text-gray-300{% endif %}">Home</a>
+        <a href="{% url 'about' %}" class="drawer-link text-lg font-medium py-3 border-b border-purple-500/5 {% if request.resolver_match.url_name == 'about' %}text-white font-semibold{% else %}text-gray-300{% endif %}">About</a>
+        <a href="{% url 'services' %}" class="drawer-link text-lg font-medium py-3 border-b border-purple-500/5 {% if request.resolver_match.url_name == 'services' %}text-white font-semibold{% else %}text-gray-300{% endif %}">Services</a>
+        <a href="{% url 'home' %}#technologies" class="drawer-link text-lg text-gray-300 font-medium py-3 border-b border-purple-500/5">Technologies</a>
+        <a href="{% url 'team' %}" class="drawer-link text-lg font-medium py-3 border-b border-purple-500/5 {% if request.resolver_match.url_name == 'team' %}text-white font-semibold{% else %}text-gray-300{% endif %}">Team</a>
+        <a href="{% url 'home' %}#contact-cta" class="drawer-link text-lg text-gray-300 font-medium py-3 border-b border-purple-500/5">Contact</a>
+
+        <div class="drawer-cta mt-8">
+            <a href="{% url 'join_us' %}" class="block text-center w-full py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-bold shadow-lg shadow-purple-500/20">
+                Join Us
+            </a>
+        </div>
+    </div>
+
+    <!-- Drawer Footer -->
+    <div class="p-7 border-t border-purple-500/10 text-center text-xs text-gray-500">
+        © 2026 Onion Techs. All Rights Reserved.
+    </div>
+</div>
+
+<style>
+    /* ---- Global overflow safety: this is the actual fix for the horizontal scroll ---- */
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    nav, #mobile-menu-drawer, #mobile-menu-overlay {
+        max-width: 100vw;
+        box-sizing: border-box;
+    }
+
+    /* Hamburger -> X morph */
+    .burger { width: 24px; height: 18px; position: relative; }
+    .burger span {
+        position: absolute; left: 0; width: 100%; height: 2px;
+        background: #fff; border-radius: 2px;
+        transition: transform .35s cubic-bezier(.4,0,.2,1), opacity .25s ease, top .35s cubic-bezier(.4,0,.2,1);
+    }
+    .burger span:nth-child(1) { top: 0; }
+    .burger span:nth-child(2) { top: 8px; }
+    .burger span:nth-child(3) { top: 16px; }
+    .menu-open .burger span:nth-child(1) { top: 8px; transform: rotate(45deg); }
+    .menu-open .burger span:nth-child(2) { opacity: 0; }
+    .menu-open .burger span:nth-child(3) { top: 8px; transform: rotate(-45deg); }
+
+    /* Overlay fade */
+    #mobile-menu-overlay { opacity: 0; transition: opacity .35s ease; }
+    #mobile-menu-overlay.show { opacity: 1; }
+
+    /* Drawer slide-in */
+    #mobile-menu-drawer {
+        transform: translateX(100%);
+        transition: transform .45s cubic-bezier(.16,1,.3,1);
+    }
+    #mobile-menu-drawer.show { transform: translateX(0); }
+
+    /* Staggered link reveal */
+    .drawer-link {
+        display: block;
+        opacity: 0;
+        transform: translateX(24px);
+        transition: opacity .4s ease, transform .4s ease;
+    }
+    #mobile-menu-drawer.show .drawer-link { opacity: 1; transform: translateX(0); }
+    #mobile-menu-drawer.show .drawer-link:nth-child(1) { transition-delay: .12s; }
+    #mobile-menu-drawer.show .drawer-link:nth-child(2) { transition-delay: .17s; }
+    #mobile-menu-drawer.show .drawer-link:nth-child(3) { transition-delay: .22s; }
+    #mobile-menu-drawer.show .drawer-link:nth-child(4) { transition-delay: .27s; }
+    #mobile-menu-drawer.show .drawer-link:nth-child(5) { transition-delay: .32s; }
+    #mobile-menu-drawer.show .drawer-link:nth-child(6) { transition-delay: .37s; }
+
+    .drawer-cta {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity .4s ease, transform .4s ease;
+        transition-delay: .44s;
+    }
+    #mobile-menu-drawer.show .drawer-cta { opacity: 1; transform: translateY(0); }
+
+    /* Desktop link underline accent */
+    .nav-link { position: relative; }
+    .nav-link::after {
+        content: '';
+        position: absolute; left: 0; bottom: -6px;
+        width: 0; height: 2px;
+        background: linear-gradient(90deg, #a855f7, #ec4899);
+        transition: width .3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    @media (prefers-reduced-motion: reduce) {
+        #mobile-menu-drawer, #mobile-menu-overlay, .drawer-link, .drawer-cta, .burger span {
+            transition: none !important;
+        }
+    }
+</style>
+
+<script>
+    (function () {
+        const openBtn = document.getElementById('mobile-menu-open');
+        const closeBtn = document.getElementById('mobile-menu-close');
+        const overlay = document.getElementById('mobile-menu-overlay');
+        const drawer = document.getElementById('mobile-menu-drawer');
+        let closeTimer = null;
+
+        function openMenu() {
+            clearTimeout(closeTimer);
+            overlay.classList.remove('hidden');
+            drawer.classList.remove('hidden');
+            openBtn.classList.add('menu-open');
+            openBtn.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => {
+                overlay.classList.add('show');
+                drawer.classList.add('show');
+            });
+        }
+
+        function closeMenu() {
+            overlay.classList.remove('show');
+            drawer.classList.remove('show');
+            openBtn.classList.remove('menu-open');
+            openBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+            closeTimer = setTimeout(() => {
+                overlay.classList.add('hidden');
+                drawer.classList.add('hidden');
+            }, 450);
+        }
+
+        openBtn.addEventListener('click', openMenu);
+        closeBtn.addEventListener('click', closeMenu);
+        overlay.addEventListener('click', closeMenu);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && drawer.classList.contains('show')) closeMenu();
+        });
+
+        // Close drawer on link click (nice for SPA-feel navigation)
+        drawer.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    })();
+</script>

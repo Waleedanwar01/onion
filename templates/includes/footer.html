@@ -1,0 +1,231 @@
+{% load static %}
+
+<div class="footer-wrap">
+    <!-- Curvy top divider — breaks the boxy rectangle look -->
+    <div class="footer-curve">
+        <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,90 L0,40 C240,90 480,0 720,20 C960,40 1200,85 1440,30 L1440,90 Z" fill="#050827"></path>
+        </svg>
+    </div>
+
+    <footer class="footer-body text-white pt-2">
+        <div class="max-w-7xl mx-auto px-6 pb-16">
+
+            <!-- CTA Strip -->
+            <div class="cta-strip rounded-3xl px-8 md:px-12 py-10 mb-16 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h3 class="font-display text-2xl md:text-3xl font-bold mb-2">Got a product idea worth building?</h3>
+                    <p class="text-gray-400">Tell us what you're building — we'll tell you how to ship it.</p>
+                </div>
+                <a href="{% url 'home' %}#contact" class="flex-shrink-0 px-7 py-3.5 rounded-full bg-gradient-to-r from-purple-600 to-fuchsia-500 font-semibold hover:scale-[1.05] active:scale-[0.98] transition-all duration-300 shadow-lg shadow-purple-500/30 whitespace-nowrap">
+                    Start a project →
+                </a>
+            </div>
+
+            <!-- Main grid -->
+            <div class="grid lg:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:grid-cols-2 gap-12">
+
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="{% static 'images/logo.png' %}" alt="Onion Techs" class="w-11 h-11 rounded-xl">
+                        <h3 class="font-display text-xl font-bold">Onion Techs</h3>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed max-w-sm">
+                        A network of skilled technology professionals delivering software development, AI solutions, mobile applications, cloud systems, and digital transformation services.
+                    </p>
+                    <div class="flex items-center gap-2 mt-6 text-sm text-gray-400">
+                        <span class="badge-dot"></span>
+                        Currently accepting new projects
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="font-display text-sm font-semibold tracking-wider uppercase text-gray-500 mb-6">Quick Links</h4>
+                    <ul class="space-y-4 text-gray-300">
+                        <li><a href="{% url 'home' %}" class="footer-link">Home</a></li>
+                        <li><a href="{% url 'about' %}" class="footer-link">About Us</a></li>
+                        <li><a href="{% url 'services' %}" class="footer-link">Services</a></li>
+                        <li><a href="{% url 'home' %}#technologies" class="footer-link">Technologies</a></li>
+                        <li><a href="{% url 'team' %}" class="footer-link">Team</a></li>
+                        <li><a href="{% url 'home' %}#contact" class="footer-link">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="font-display text-sm font-semibold tracking-wider uppercase text-gray-500 mb-6">Services</h4>
+                    <ul class="space-y-4 text-gray-300">
+                        <li>AI &amp; Chatbot Development</li>
+                        <li>Mobile App Development</li>
+                        <li>Website Development</li>
+                        <li>Blockchain Solutions</li>
+                        <li>API Integration</li>
+                        <li>Cloud &amp; DevOps</li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div id="contact">
+                    <h4 class="font-display text-sm font-semibold tracking-wider uppercase text-gray-500 mb-6">Contact Info</h4>
+                    <ul class="space-y-4 text-gray-300 mb-8">
+                        <li class="contact-row flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" class="w-4 h-4"><path d="M3 5h18v14H3z" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 7l9 6 9-6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                            info@oniontechs.com
+                        </li>
+                        <li class="contact-row flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" class="w-4 h-4"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            </span>
+                            +92 XXX XXXXXXX
+                        </li>
+                        <li class="contact-row flex items-center gap-3">
+                            <span class="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center flex-shrink-0">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="#c084fc" stroke-width="2" class="w-4 h-4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3"/></svg>
+                            </span>
+                            Pakistan
+                        </li>
+                    </ul>
+
+                    <div class="flex gap-3">
+                        <a href="#" class="social-icon" title="Facebook">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.5 9.87v-6.99H7.9v-2.88h2.6V9.84c0-2.57 1.53-3.99 3.87-3.99 1.12 0 2.3.2 2.3.2v2.53h-1.3c-1.28 0-1.68.8-1.68 1.62v1.94h2.86l-.46 2.88h-2.4v6.99A10 10 0 0 0 22 12z"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" title="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.34 18.34V9.75H5.7v8.59h2.64zM7 8.6a1.53 1.53 0 1 0 0-3.06 1.53 1.53 0 0 0 0 3.06zm11.34 9.74v-4.7c0-2.5-1.34-3.67-3.13-3.67-1.44 0-2.09.79-2.45 1.35v-1.16h-2.64c.03.7 0 8.18 0 8.18h2.64v-4.8c0-.26.02-.52.1-.7.22-.53.7-1.08 1.54-1.08 1.09 0 1.53.83 1.53 2.04v4.54h2.41z"/></svg>
+                        </a>
+                        <a href="#" class="social-icon" title="GitHub">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.03a9.5 9.5 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.74c0 .27.18.57.69.48A10 10 0 0 0 12 2z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="border-white/10 my-12">
+
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+                <p class="text-gray-500">© 2026 Onion Techs. All Rights Reserved.</p>
+                <div class="flex gap-8 text-gray-500">
+                    <a href="#" class="hover:text-white transition-colors duration-200">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition-colors duration-200">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+
+<style>
+    .font-display { font-family: 'Sora', 'Inter', sans-serif; }
+
+    /* ---- Curvy top shape: this is what breaks the boxy rectangle ---- */
+    .footer-wrap {
+        position: relative;
+        margin-top: 80px;
+    }
+    .footer-curve {
+        position: absolute;
+        top: -1px;
+        left: 0;
+        width: 100%;
+        height: 90px;
+        overflow: hidden;
+        line-height: 0;
+        transform: translateY(-1px);
+    }
+    .footer-curve svg {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+
+    .footer-body {
+        position: relative;
+        background:
+            radial-gradient(ellipse 80% 60% at 15% 0%, rgba(168,85,247,0.18), transparent 60%),
+            radial-gradient(ellipse 70% 50% at 100% 100%, rgba(236,72,153,0.12), transparent 60%),
+            #050827;
+        overflow: hidden;
+    }
+
+    /* faint grid texture for depth */
+    .footer-body::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+            linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+        background-size: 48px 48px;
+        pointer-events: none;
+    }
+
+    .cta-strip {
+        position: relative;
+        border: 1px solid rgba(168,85,247,0.25);
+        background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(236,72,153,0.06));
+    }
+
+    .social-icon {
+        width: 42px; height: 42px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        transition: all .3s cubic-bezier(.4,0,.2,1);
+        color: #fff;
+    }
+    .social-icon:hover {
+        background: linear-gradient(135deg, #a855f7, #ec4899);
+        border-color: transparent;
+        transform: translateY(-3px);
+    }
+    .social-icon svg { width: 18px; height: 18px; }
+
+    .footer-link {
+        position: relative;
+        display: inline-block;
+        transition: color .25s ease, transform .25s ease;
+    }
+    .footer-link::before {
+        content: '→';
+        position: absolute;
+        left: -18px;
+        opacity: 0;
+        transition: opacity .25s ease, left .25s ease;
+        color: #c084fc;
+    }
+    .footer-link:hover {
+        color: #fff;
+        transform: translateX(6px);
+    }
+    .footer-link:hover::before {
+        opacity: 1;
+        left: -20px;
+    }
+
+    .contact-row {
+        transition: transform .25s ease;
+    }
+    .contact-row:hover {
+        transform: translateX(4px);
+    }
+
+    .badge-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #34d399;
+        box-shadow: 0 0 0 3px rgba(52,211,153,0.2);
+    }
+
+    @media (max-width: 640px) {
+        .footer-curve { height: 50px; }
+        .footer-wrap { margin-top: 40px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        .social-icon, .footer-link, .contact-row { transition: none !important; }
+    }
+</style>

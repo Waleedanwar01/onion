@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+
+    {# ============================================================ #}
+    {# DYNAMIC SEO - pulled from PageSEO model via context processor #}
+    {# ============================================================ #}
+    <title>{% block title %}{{ seo.meta_title|default:"Onion Techs | Software Development Company" }}{% endblock %}</title>
+
+    <meta name="description" content="{% block meta_description %}{{ seo.meta_description|default:"Onion Techs is a professional technology company delivering web development, mobile app development, AI solutions, blockchain, cloud services, and custom software." }}{% endblock %}">
+    <meta name="keywords" content="{{ seo.meta_keywords|default:'software development, web development, mobile apps, AI development, blockchain, onion techs, Pakistan tech company' }}">
+    <meta name="author" content="{{ seo.author|default:'Onion Techs' }}">
+    <meta name="robots" content="{{ seo.robots_meta|default:'index, follow' }}">
+
+    {# ----- Canonical URL ----- #}
+    {% if seo and seo.canonical_url %}
+    <link rel="canonical" href="{{ seo.canonical_url }}">
+    {% endif %}
+
+    {# ============================================================ #}
+    {# OPEN GRAPH (Facebook / LinkedIn / WhatsApp)                  #}
+    {# ============================================================ #}
+    <meta property="og:title" content="{% block og_title %}{% if seo %}{{ seo.og_title|default:seo.meta_title|default:'Onion Techs | Software Development Company' }}{% else %}Onion Techs | Software Development Company{% endif %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% if seo %}{{ seo.og_description|default:seo.meta_description|default:'World-class software development by a network of elite engineers.' }}{% else %}World-class software development by a network of elite engineers.{% endif %}{% endblock %}">
+    <meta property="og:type" content="{{ seo.og_type|default:'website' }}">
+    <meta property="og:url" content="{% if seo and seo.canonical_url %}{{ seo.canonical_url }}{% else %}https://oniontechs.com{% endif %}">
+    <meta property="og:site_name" content="Onion Techs">
+    {% if seo and seo.og_image %}
+    <meta property="og:image" content="{{ seo.og_image.url }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="{% if seo %}{{ seo.og_title|default:seo.meta_title }}{% endif %}">
+    {% endif %}
+
+    {# ============================================================ #}
+    {# TWITTER CARD                                                 #}
+    {# ============================================================ #}
+    <meta name="twitter:card" content="{{ seo.twitter_card|default:'summary_large_image' }}">
+    <meta name="twitter:title" content="{% if seo %}{{ seo.twitter_title|default:seo.meta_title|default:'Onion Techs' }}{% else %}Onion Techs{% endif %}">
+    <meta name="twitter:description" content="{% if seo %}{{ seo.twitter_description|default:seo.meta_description|default:'World-class software development.' }}{% else %}World-class software development.{% endif %}">
+    {% if seo and seo.twitter_image %}
+    <meta name="twitter:image" content="{{ seo.twitter_image.url }}">
+    {% else %}
+        {% if seo and seo.og_image %}
+        <meta name="twitter:image" content="{{ seo.og_image.url }}">
+        {% endif %}
+    {% endif %}
+    <meta name="twitter:site" content="@oniontechs">
+
+    {# ============================================================ #}
+    {# JSON-LD STRUCTURED DATA                                      #}
+    {# ============================================================ #}
+    {% if seo and seo.schema_json %}
+    <script type="application/ld+json">
+{{ seo.schema_json|safe }}
+    </script>
+    {% endif %}
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
+
+    <!-- Google Fonts: Inter + Poppins + Sora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;600;700;800&family=Sora:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Devicons (Tech stack icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
+
+    <!-- AOS — Animate On Scroll -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Global Custom Styles -->
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="bg-[#030514] text-white flex flex-col min-h-screen">
+
+    <!-- Subtle grid overlay (always on) -->
+    <div class="cyber-grid" aria-hidden="true"></div>
+    <div class="cyber-mesh"  aria-hidden="true"></div>
+
+    <!-- ======== NAVBAR ======== -->
+    {% include 'includes/navbar.html' %}
+
+    <!-- ======== PAGE CONTENT ======== -->
+    <main class="flex-grow">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- ======== FOOTER ======== -->
+    {% include 'includes/footer.html' %}
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <!-- Global Script -->
+    <script src="{% static 'js/script.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

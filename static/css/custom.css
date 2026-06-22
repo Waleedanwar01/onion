@@ -1,0 +1,202 @@
+/* ============================================================
+   Onion Techs — Global Custom Stylesheet
+   Design System: Dark Purple / Fuchsia Glassmorphic
+============================================================ */
+
+/* ---- CSS Variables ---- */
+:root {
+    --c-bg:        #030514;
+    --c-surface:   #070B34;
+    --c-purple:    #8B3DFF;
+    --c-fuchsia:   #C84DFF;
+    --c-text:      #F1F5F9;
+    --c-muted:     #94A3B8;
+    --radius-card: 1rem;
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Poppins', 'Inter', sans-serif; }
+
+/* ============================================================
+   LAYOUT UTILITIES
+============================================================ */
+
+/* Gradient text helper */
+.gradient-text {
+    background: linear-gradient(120deg, #a855f7 0%, #e879f9 50%, #f472b6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   GLASS MORPHISM COMPONENTS
+============================================================ */
+
+/* Light glass — for tech icon cards */
+.glass {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(168, 85, 247, 0.30);
+    box-shadow: 0 10px 32px rgba(139, 61, 255, 0.15);
+}
+
+/* Dark glass card — for service cards, FAQ, stats */
+.glass-card {
+    background: rgba(7, 11, 52, 0.45);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(139, 61, 255, 0.10);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card:hover {
+    background: rgba(10, 16, 65, 0.60);
+    border-color: rgba(139, 61, 255, 0.28);
+    box-shadow: 0 16px 40px rgba(139, 61, 255, 0.12);
+    transform: translateY(-4px);
+}
+
+/* ============================================================
+   BUTTONS
+============================================================ */
+.glow-btn {
+    box-shadow: 0 0 22px rgba(139, 61, 255, 0.40);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.glow-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 38px rgba(139, 61, 255, 0.65);
+}
+.glow-btn:active { transform: translateY(-1px); }
+
+/* ============================================================
+   ANIMATIONS
+============================================================ */
+
+/* Floating bob — hero terminal, image frames */
+.floating {
+    animation: floatBob 6s ease-in-out infinite;
+}
+@keyframes floatBob {
+    0%, 100% { transform: translateY(0px); }
+    50%       { transform: translateY(-14px); }
+}
+
+/* Fade-up reveal */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Typing cursor */
+#typing-text {
+    border-right: 2px solid #a855f7;
+    padding-right: 3px;
+    animation: cursorBlink 0.75s step-end infinite;
+}
+@keyframes cursorBlink {
+    from, to { border-color: transparent; }
+    50%       { border-color: #a855f7; }
+}
+
+/* Counter text */
+.counter { font-weight: 800; }
+
+/* ============================================================
+   CYBER GRID / MESH BACKGROUND (always-on subtle grid)
+============================================================ */
+.cyber-grid {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(to right,  rgba(139, 61, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(139, 61, 255, 0.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+    z-index: -20;
+    pointer-events: none;
+}
+.cyber-mesh {
+    position: fixed;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 10% 10%,  rgba(139, 61, 255, 0.09) 0%, transparent 40%),
+        radial-gradient(circle at 90% 40%,  rgba(200, 77, 255, 0.07) 0%, transparent 40%),
+        radial-gradient(circle at 30% 75%,  rgba(59, 130, 246, 0.05) 0%, transparent 50%);
+    z-index: -19;
+    pointer-events: none;
+}
+
+/* ============================================================
+   MOBILE MENU — desktop nav link underline accent
+============================================================ */
+.nav-link { position: relative; }
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -5px;
+    width: 0; height: 2px;
+    background: linear-gradient(90deg, #a855f7, #ec4899);
+    transition: width 0.3s ease;
+}
+.nav-link:hover::after { width: 100%; }
+
+/* ============================================================
+   HERO TERMINAL — colours used inline via JS
+============================================================ */
+.term-prompt  { color: #a855f7; font-weight: 600; }
+.term-cmd     { color: #e2e8f0; }
+.term-output  { color: #4ade80; }
+.term-success { color: #4ade80; }
+.term-comment { color: #6b7280; }
+
+/* ============================================================
+   FAQ — <details> native accordion
+============================================================ */
+details summary::-webkit-details-marker { display: none; }
+details[open] summary .faq-icon { transform: rotate(45deg); }
+
+/* ============================================================
+   SERVICE / TEAM CARDS
+============================================================ */
+.service-card { transition: 0.35s ease; }
+.service-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(139, 61, 255, 0.15); }
+.team-card    { transition: 0.35s ease; }
+.team-card:hover { transform: translateY(-6px); }
+
+/* ============================================================
+   RESPONSIVE SAFE-GUARDS
+============================================================ */
+html, body { max-width: 100%; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}

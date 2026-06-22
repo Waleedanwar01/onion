@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{# ── Per-service SEO overrides ── #}
+{% block title %}{{ service.meta_title|default:service.title }}{% endblock %}
+{% block meta_description %}{{ service.meta_description|default:service.short_description }}{% endblock %}
+{% block og_title %}{% if service.og_title %}{{ service.og_title }}{% else %}{{ service.meta_title|default:service.title }}{% endif %}{% endblock %}
+{% block og_description %}{% if service.og_description %}{{ service.og_description }}{% else %}{{ service.meta_description|default:service.short_description }}{% endif %}{% endblock %}
+
+{% block extra_css %}
+<style>
+.feature-item::before {
+    content: '✓';
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #7c3aed, #a855f7);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-right: 12px;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <!-- ===== HERO ===== -->
+    <section class="relative pt-40 pb-24 overflow-hidden z-10">
+        <div class="absolute top-20 left-0 w-96 h-96 bg-purple-700/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-fuchsia-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <!-- Breadcrumb -->
+            <nav class="flex justify-center items-center gap-2 text-xs text-gray-500 mb-8">
+                <a href="{% url 'home' %}" class="hover:text-purple-400 transition">Home</a>
+                <span>/</span>
+                <a href="{% url 'services' %}" class="hover:text-purple-400 transition">Services</a>
+                <span>/</span>
+                <span class="text-purple-400">{{ service.title }}</span>
+            </nav>
+
+            <!-- Icon -->
+            <div class="w-20 h-20 mx-auto rounded-2xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-4xl mb-8 shadow-xl shadow-purple-900/30" data-aos="zoom-in">
+                {{ service.icon }}
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight" data-aos="fade-up">
+                {{ service.title }}
+            </h1>
+            <p class="mt-6 text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="100">
+                {{ service.short_description }}
+            </p>
+            <div class="flex flex-wrap gap-4 justify-center mt-10" data-aos="fade-up" data-aos-delay="200">
+                <a href="mailto:info@oniontechs.com" class="px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn text-sm">
+                    Get a Quote →
+                </a>
+                <a href="{% url 'services' %}" class="px-8 py-4 rounded-xl border border-white/20 text-white font-semibold text-sm hover:bg-white/5 transition-all duration-300">
+                    ← All Services
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FULL DESCRIPTION ===== -->
+    <section class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-14 items-start">
+                <!-- Description -->
+                <div data-aos="fade-right">
+                    <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Overview</span>
+                    <h2 class="text-3xl font-extrabold text-white mt-4 mb-6">What We Offer</h2>
+                    <div class="text-gray-400 leading-relaxed space-y-4 text-sm">
+                        {{ service.full_description|linebreaksbr }}
+                    </div>
+                </div>
+
+                <!-- Key Features -->
+                {% if service.get_features_list %}
+                <div data-aos="fade-left" class="glass-card p-8 rounded-2xl">
+                    <h3 class="text-xl font-extrabold text-white mb-6">Key Features</h3>
+                    <ul class="space-y-4">
+                        {% for feature in service.get_features_list %}
+                        <li class="feature-item flex items-center text-gray-300 text-sm font-medium">
+                            {{ feature }}
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA STRIP ===== -->
+    <section class="py-16 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div data-aos="zoom-in" class="glass-card rounded-3xl p-10 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8 border border-purple-500/25 relative overflow-hidden">
+                <div class="absolute -top-16 -right-16 w-64 h-64 bg-purple-600/20 rounded-full blur-[80px] pointer-events-none"></div>
+                <div class="relative">
+                    <h3 class="text-2xl md:text-3xl font-extrabold text-white">Need {{ service.title }}?</h3>
+                    <p class="mt-2 text-gray-400 max-w-lg">Let's build something exceptional together. Get a free consultation today.</p>
+                </div>
+                <div class="relative flex gap-4 flex-shrink-0">
+                    <a href="mailto:info@oniontechs.com" class="px-7 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn text-sm whitespace-nowrap">
+                        Contact Us →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RELATED SERVICES ===== -->
+    {% if related_services %}
+    <section class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12" data-aos="fade-up">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Explore More</span>
+                <h2 class="text-3xl font-extrabold text-white mt-4">Related Services</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+                {% for related in related_services %}
+                <a href="{% url 'service_detail' related.slug %}" class="glass-card p-8 rounded-2xl group flex flex-col hover:border-purple-500/40 transition-all duration-300" data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00">
+                    <div class="w-12 h-12 rounded-2xl bg-purple-600/20 flex items-center justify-center text-xl mb-5 group-hover:scale-110 transition-transform duration-300">
+                        {{ related.icon }}
+                    </div>
+                    <h3 class="font-bold text-lg text-white group-hover:text-purple-300 transition">{{ related.title }}</h3>
+                    <p class="text-gray-400 text-sm mt-3 leading-relaxed flex-grow">{{ related.short_description|truncatechars:100 }}</p>
+                    <span class="mt-5 text-purple-400 text-sm font-semibold group-hover:text-purple-300 transition">Learn More →</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- ===== JSON-LD ===== -->
+    {% if service.schema_json %}
+    <script type="application/ld+json">{{ service.schema_json|safe }}</script>
+    {% endif %}
+
+{% endblock %}

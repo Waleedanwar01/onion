@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ seo.meta_title|default:"Join Us | Onion Techs Careers" }}{% endblock %}
+{% block meta_description %}{{ seo.meta_description|default:"Join Onion Techs — a network of elite engineers building world-class software." }}{% endblock %}
+
+{% block content %}
+
+    <!-- ===== HERO ===== -->
+    <section class="relative pt-40 pb-24 overflow-hidden z-10">
+        <div class="absolute top-20 left-0 w-96 h-96 bg-purple-700/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-fuchsia-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-2 gap-14 items-center">
+                <div data-aos="fade-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/40 bg-purple-500/10 text-purple-300 text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        We're Hiring
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight">
+                        Build Your Career<br>
+                        <span class="gradient-text">With Onion Techs</span>
+                    </h1>
+                    <p class="mt-7 text-gray-400 text-lg leading-relaxed max-w-xl">
+                        We hire curious, collaborative, and results-driven people. Remote-first with flexible hours, real ownership, and a team that ships.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-10">
+                        <a href="#open-roles" class="px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn text-sm">
+                            See Open Roles →
+                        </a>
+                        <a href="#apply" class="px-8 py-4 rounded-xl border border-white/20 text-white font-semibold text-sm hover:bg-white/5 transition-all duration-300">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+                <div data-aos="fade-left" class="relative grid grid-cols-2 gap-5">
+                    <div class="glass-card rounded-2xl p-6 text-center">
+                        <p class="text-4xl font-extrabold gradient-text">7+</p>
+                        <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Engineers</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center mt-8">
+                        <p class="text-4xl font-extrabold gradient-text">15+</p>
+                        <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Countries</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center -mt-2">
+                        <p class="text-4xl font-extrabold gradient-text">100%</p>
+                        <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Remote</p>
+                    </div>
+                    <div class="glass-card rounded-2xl p-6 text-center mt-6">
+                        <p class="text-4xl font-extrabold gradient-text">3+</p>
+                        <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Years</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OPEN ROLES ===== -->
+    <section id="open-roles" class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Open Roles</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4">Current Openings</h2>
+                <p class="text-gray-400 mt-5 max-w-2xl mx-auto">Find a role that matches your craft and apply in under two minutes.</p>
+            </div>
+
+            <div class="space-y-5">
+                {% for job in jobs %}
+                <div data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00"
+                     class="glass-card p-6 md:p-7 rounded-2xl flex flex-col md:flex-row md:justify-between md:items-center gap-5 group">
+                    <div>
+                        <h3 class="font-bold text-xl text-white">{{ job.title }}</h3>
+                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">{{ job.description }}</p>
+                        <div class="flex flex-wrap gap-2 mt-4">
+                            {% for skill in job.get_skills_list %}
+                            <span class="px-3 py-1 rounded-full bg-purple-500/15 text-purple-300 text-xs font-semibold border border-purple-500/20">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 flex-shrink-0">
+                        {% if job.location_type == 'remote' %}
+                            <span class="px-3 py-1.5 bg-green-500/15 text-green-300 font-semibold text-xs rounded-full border border-green-500/25">Remote</span>
+                        {% elif job.location_type == 'hybrid' %}
+                            <span class="px-3 py-1.5 bg-fuchsia-500/15 text-fuchsia-300 font-semibold text-xs rounded-full border border-fuchsia-500/25">Hybrid</span>
+                        {% else %}
+                            <span class="px-3 py-1.5 bg-orange-500/15 text-orange-300 font-semibold text-xs rounded-full border border-orange-500/25">On-site</span>
+                        {% endif %}
+                        <a href="#apply" class="px-6 py-2.5 bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold text-sm rounded-xl glow-btn whitespace-nowrap">Apply Now</a>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="glass-card p-10 rounded-2xl text-center">
+                    <p class="text-4xl mb-4">🔔</p>
+                    <h3 class="text-xl font-bold text-white">No openings right now</h3>
+                    <p class="text-gray-400 mt-3">We're always looking for talented people. Send us your CV and we'll keep you in mind.</p>
+                    <a href="#apply" class="inline-block mt-6 px-8 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold text-sm glow-btn">Send Your CV →</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PERKS ===== -->
+    <section class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14" data-aos="fade-up">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Perks &amp; Benefits</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4">Why People Stay</h2>
+                <p class="text-gray-400 mt-5 max-w-2xl mx-auto">We invest in our people — with flexibility, growth budgets, and a culture that respects your time.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div data-aos="fade-up" data-aos-delay="0"   class="glass-card p-8 rounded-2xl text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-600/20 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">📅</div>
+                    <h4 class="font-bold text-lg text-white">Flexible PTO</h4>
+                    <p class="text-sm text-gray-400 mt-3 leading-relaxed">Take time off when you need it to stay refreshed and do your best work.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="glass-card p-8 rounded-2xl text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-600/20 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">🎓</div>
+                    <h4 class="font-bold text-lg text-white">Learning Budget</h4>
+                    <p class="text-sm text-gray-400 mt-3 leading-relaxed">Annual stipend for books, courses, certifications, and conferences.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="glass-card p-8 rounded-2xl text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-600/20 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">🏥</div>
+                    <h4 class="font-bold text-lg text-white">Health Stipend</h4>
+                    <p class="text-sm text-gray-400 mt-3 leading-relaxed">Stipend to support your fitness, wellness, and mental health.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="glass-card p-8 rounded-2xl text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-2xl bg-purple-600/20 flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300">🌍</div>
+                    <h4 class="font-bold text-lg text-white">Remote First</h4>
+                    <p class="text-sm text-gray-400 mt-3 leading-relaxed">Work from anywhere in the world with async-friendly communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== APPLY FORM ===== -->
+    <section id="apply" class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-3xl mx-auto px-6">
+            <div data-aos="zoom-in" class="glass-card rounded-3xl p-8 md:p-12 border border-purple-500/25 relative overflow-hidden">
+                <div class="absolute -top-24 -right-24 w-72 h-72 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-fuchsia-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="relative text-center mb-10">
+                    <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Apply Now</span>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-white mt-4">Submit Your Application</h3>
+                    <p class="text-gray-400 mt-4 max-w-xl mx-auto">Tell us a little about yourself. We respond to every applicant within 5 business days.</p>
+                </div>
+                <form method="POST" class="relative space-y-5">
+                    {% csrf_token %}
+                    <div class="grid md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Full Name</label>
+                            <input type="text" required class="w-full p-3.5 bg-[#0d1033]/60 border border-purple-500/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/60 focus:ring-2 focus:ring-purple-500/20 transition" placeholder="Your name" />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-300 mb-2">Email Address</label>
+                            <input type="email" required class="w-full p-3.5 bg-[#0d1033]/60 border border-purple-500/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/60 focus:ring-2 focus:ring-purple-500/20 transition" placeholder="you@example.com" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Select Role</label>
+                        <select class="w-full p-3.5 bg-[#0d1033]/60 border border-purple-500/20 rounded-xl text-white focus:outline-none focus:border-purple-500/60 focus:ring-2 focus:ring-purple-500/20 transition">
+                            {% for job in jobs %}
+                            <option class="bg-[#0d1033]">{{ job.title }}</option>
+                            {% empty %}
+                            <option class="bg-[#0d1033]">General Application</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Resume / Portfolio Link</label>
+                        <input type="url" required class="w-full p-3.5 bg-[#0d1033]/60 border border-purple-500/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/60 focus:ring-2 focus:ring-purple-500/20 transition" placeholder="https://linkedin.com/in/... or portfolio URL" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Tell us about yourself</label>
+                        <textarea rows="4" class="w-full p-3.5 bg-[#0d1033]/60 border border-purple-500/20 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-purple-500/60 focus:ring-2 focus:ring-purple-500/20 transition resize-none" placeholder="A few lines about your experience and what excites you..."></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn hover:scale-[1.02] duration-300">
+                        Submit Application →
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,714 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Onion Techs | Software Development Company{% endblock %}
+
+{% block content %}
+
+    <!-- Smoke / Fog Drift Background -->
+    <div id="smoke-bg" aria-hidden="true">
+        <div class="smoke smoke-1"></div>
+        <div class="smoke smoke-2"></div>
+        <div class="smoke smoke-3"></div>
+        <div class="smoke smoke-4"></div>
+    </div>
+
+    <!-- ====================== HERO SECTION ====================== -->
+    <section id="home" class="relative min-h-screen flex items-center overflow-hidden z-10">
+
+        <!-- Ambient glow orbs -->
+        <div class="absolute top-20 left-0 w-96 h-96 rounded-full bg-purple-700/20 blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-10 right-0 w-80 h-80 rounded-full bg-fuchsia-600/20 blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 pt-28 pb-16 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+
+                <!-- LEFT: Text Content -->
+                <div data-aos="fade-right">
+
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/40 bg-purple-500/10 text-purple-300 text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        Now Accepting New Projects
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-[68px] font-extrabold text-white leading-[1.08] tracking-tight">
+                        We Build
+                        <span class="block gradient-text">World-Class</span>
+                        Software
+                    </h1>
+
+                    <p class="mt-7 text-gray-400 text-lg leading-relaxed max-w-lg">
+                        Onion Techs is a network of elite engineers delivering custom software, AI solutions, mobile apps, and digital transformation — on time, on budget.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4 mt-10">
+                        <a href="{% url 'join_us' %}" class="px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn text-sm">
+                            Start Your Project →
+                        </a>
+                        <a href="{% url 'services' %}" class="px-8 py-4 rounded-xl border border-white/20 text-white font-semibold text-sm hover:bg-white/5 transition-all duration-300">
+                            Explore Services
+                        </a>
+                    </div>
+
+                    <!-- Mini stats row -->
+                    <div class="flex gap-10 mt-12 pt-8 border-t border-white/5">
+                        <div>
+                            <p class="text-3xl font-extrabold text-white">50+</p>
+                            <p class="text-gray-500 text-xs mt-1 uppercase tracking-widest">Projects</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-extrabold text-white">7+</p>
+                            <p class="text-gray-500 text-xs mt-1 uppercase tracking-widest">Experts</p>
+                        </div>
+                        <div>
+                            <p class="text-3xl font-extrabold text-white">3+</p>
+                            <p class="text-gray-500 text-xs mt-1 uppercase tracking-widest">Years</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Animated Code Terminal -->
+                <div data-aos="fade-left" class="relative flex items-center justify-center">
+
+                    <!-- Outer glow -->
+                    <div class="absolute -inset-6 rounded-3xl bg-gradient-to-br from-purple-700/20 via-fuchsia-600/10 to-transparent blur-3xl pointer-events-none"></div>
+
+                    <!-- Terminal window -->
+                    <div class="relative w-full max-w-[540px] rounded-2xl overflow-hidden border border-purple-500/20 shadow-2xl shadow-purple-900/30 floating">
+
+                        <!-- Title bar -->
+                        <div class="flex items-center gap-2 px-5 py-3.5 bg-[#0d1033] border-b border-purple-900/30">
+                            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+                            <span class="ml-4 text-xs text-gray-500 font-mono">onion-techs ~ /projects/build</span>
+                        </div>
+
+                        <!-- Terminal Body -->
+                        <div class="bg-[#080b28] p-6 font-mono text-sm leading-7 min-h-[340px]">
+                            <div id="terminal-output"></div>
+                            <span id="terminal-cursor" class="inline-block w-2.5 h-5 bg-purple-400 align-middle animate-pulse ml-0.5"></span>
+                        </div>
+
+                        <!-- Status bar -->
+                        <div class="flex items-center justify-between px-5 py-2.5 bg-gradient-to-r from-purple-700 to-fuchsia-600 text-xs text-white/90 font-mono">
+                            <span>● main  ✓ build passing</span>
+                            <span class="flex items-center gap-3">
+                                <span class="opacity-70">Python 3.11</span>
+                                <span class="opacity-70">|</span>
+                                <span class="opacity-70">Node 20</span>
+                                <span class="opacity-70">|</span>
+                                <span class="opacity-70">UTF-8</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Floating skill badges -->
+                    <div class="hero-float-badge" style="top:-10px; right:-20px; animation-delay:0s;">⚛ React</div>
+                    <div class="hero-float-badge" style="bottom:60px; right:-30px; animation-delay:0.8s;">🐍 Django</div>
+                    <div class="hero-float-badge" style="bottom:-10px; left:30px; animation-delay:1.5s;">📱 Flutter</div>
+                    <div class="hero-float-badge" style="top:80px; left:-25px; animation-delay:2.2s;">🤖 AI/ML</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== STATS BAR ====================== -->
+    <section class="py-14 border-y border-purple-500/10 relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center p-6 rounded-2xl glass-card">
+                    <h3 class="text-4xl font-extrabold text-purple-400 counter" data-target="55">0</h3>
+                    <p class="mt-2 text-gray-400 text-xs font-semibold uppercase tracking-widest">Projects Delivered</p>
+                </div>
+                <div class="text-center p-6 rounded-2xl glass-card">
+                    <h3 class="text-4xl font-extrabold text-purple-400 counter" data-target="7">0</h3>
+                    <p class="mt-2 text-gray-400 text-xs font-semibold uppercase tracking-widest">Tech Experts</p>
+                </div>
+                <div class="text-center p-6 rounded-2xl glass-card">
+                    <h3 class="text-4xl font-extrabold text-purple-400 counter" data-target="3">0</h3>
+                    <p class="mt-2 text-gray-400 text-xs font-semibold uppercase tracking-widest">Years Active</p>
+                </div>
+                <div class="text-center p-6 rounded-2xl glass-card">
+                    <h3 class="text-4xl font-extrabold text-purple-400 counter" data-target="20">0</h3>
+                    <p class="mt-2 text-gray-400 text-xs font-semibold uppercase tracking-widest">Tech Stacks</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== ABOUT SECTION ====================== -->
+    <section class="py-24 relative z-10 overflow-hidden">
+        <!-- Ambient glow -->
+        <div class="absolute top-0 left-1/4 w-[500px] h-[300px] bg-purple-700/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Left: Real Photo -->
+                <div data-aos="fade-right" class="relative group">
+                    <div class="absolute -inset-3 rounded-3xl bg-gradient-to-br from-purple-600/30 to-fuchsia-600/20 blur-2xl opacity-60 group-hover:opacity-90 transition-all duration-700 -z-10"></div>
+                    <div class="relative rounded-2xl overflow-hidden border border-purple-500/20 shadow-2xl">
+                        <img src="{% static 'images/about_office.png' %}" alt="Onion Techs Office - Modern Software Development Environment" class="w-full h-[380px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <!-- Overlay badge -->
+                        <div class="absolute bottom-5 left-5 flex items-center gap-3 bg-[#070B34]/85 backdrop-blur-md border border-purple-500/30 px-5 py-3 rounded-xl">
+                            <span class="w-3 h-3 rounded-full bg-green-400 animate-pulse flex-shrink-0"></span>
+                            <p class="text-white text-sm font-semibold">Our Workspace — Lahore, PK</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Text -->
+                <div data-aos="fade-left">
+                    <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">About Us</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4 leading-tight">
+                        A Strong Network<br>Of Tech Experts
+                    </h2>
+                    <p class="mt-6 text-gray-400 leading-relaxed">
+                        Onion Techs is a collective of highly skilled technology professionals working together under one trusted brand. We specialize in software development, mobile applications, AI solutions, cloud technologies, and digital transformation.
+                    </p>
+                    <p class="mt-4 text-gray-400 leading-relaxed">
+                        Our mission is to help startups and enterprises build scalable, secure, and modern software solutions using the latest technologies.
+                    </p>
+
+                    <!-- Feature list -->
+                    <ul class="mt-8 space-y-3">
+                        <li class="flex items-center gap-3 text-gray-300 text-sm">
+                            <span class="w-5 h-5 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center text-purple-400 text-xs flex-shrink-0">✓</span>
+                            Agile-first delivery with weekly sprint reviews
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300 text-sm">
+                            <span class="w-5 h-5 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center text-purple-400 text-xs flex-shrink-0">✓</span>
+                            OWASP-compliant, security-first architecture
+                        </li>
+                        <li class="flex items-center gap-3 text-gray-300 text-sm">
+                            <span class="w-5 h-5 rounded-full bg-purple-500/20 border border-purple-500/50 flex items-center justify-center text-purple-400 text-xs flex-shrink-0">✓</span>
+                            Transparent pricing, no hidden costs
+                        </li>
+                    </ul>
+
+                    <div class="mt-8">
+                        <a href="{% url 'about' %}" class="px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn inline-block text-sm">
+                            Learn More About Us →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== WHY CHOOSE US ====================== -->
+    <section class="py-20 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Why Choose Us</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold mt-4 text-white">
+                    Why Businesses Trust Onion Techs
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div data-aos="fade-up" data-aos-delay="0" class="p-7 rounded-2xl glass-card group hover:border-purple-500/40">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 flex items-center justify-center mb-6 group-hover:bg-purple-600/35 transition-colors duration-300">
+                        <span class="text-2xl">🚀</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-3">Fast Delivery</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Agile sprints, weekly builds, and rapid MVP delivery without cutting corners.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="p-7 rounded-2xl glass-card group hover:border-purple-500/40">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 flex items-center justify-center mb-6 group-hover:bg-purple-600/35 transition-colors duration-300">
+                        <span class="text-2xl">💡</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-3">Modern Solutions</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Latest frameworks, serverless architecture, edge computing, and cloud-native deployments.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="p-7 rounded-2xl glass-card group hover:border-purple-500/40">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 flex items-center justify-center mb-6 group-hover:bg-purple-600/35 transition-colors duration-300">
+                        <span class="text-2xl">🔒</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-3">Secure Systems</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Security-first design, end-to-end encryption, and full OWASP audit compliance built in.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="p-7 rounded-2xl glass-card group hover:border-purple-500/40">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 flex items-center justify-center mb-6 group-hover:bg-purple-600/35 transition-colors duration-300">
+                        <span class="text-2xl">🤝</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-white mb-3">Dedicated Support</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Long-term SLA-backed support, hosting assistance, and transparent communication.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== TECHNOLOGIES ====================== -->
+    <section id="technologies" class="py-20 relative z-10 border-y border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Technologies</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold mt-4 text-white">Technologies We Build With</h2>
+            </div>
+
+            <div class="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {% for tech in technologies %}
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300 cursor-default">
+                    <i class="{{ tech.icon }} colored text-4xl"></i>
+                    <span class="font-medium text-gray-300 text-xs text-center">{{ tech.name }}</span>
+                </div>
+                {% empty %}
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-angularjs-plain colored text-4xl"></i><span class="text-gray-300 text-xs">Angular</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-flutter-plain colored text-4xl"></i><span class="text-gray-300 text-xs">Flutter</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-nodejs-plain colored text-4xl"></i><span class="text-gray-300 text-xs">Node JS</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-laravel-original colored text-4xl"></i><span class="text-gray-300 text-xs">Laravel</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-php-plain colored text-4xl"></i><span class="text-gray-300 text-xs">PHP</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-python-plain colored text-4xl"></i><span class="text-gray-300 text-xs">Python</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-react-original colored text-4xl"></i><span class="text-gray-300 text-xs">React</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-vuejs-plain colored text-4xl"></i><span class="text-gray-300 text-xs">Vue JS</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-django-plain colored text-4xl"></i><span class="text-gray-300 text-xs">Django</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-shopify-plain colored text-4xl"></i><span class="text-gray-300 text-xs">Shopify</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-wordpress-plain colored text-4xl"></i><span class="text-gray-300 text-xs">WordPress</span></div>
+                <div class="glass-card p-5 rounded-xl flex flex-col items-center gap-3 hover:border-purple-500/40 hover:-translate-y-1 transition-all duration-300"><i class="devicon-woocommerce-plain colored text-4xl"></i><span class="text-gray-300 text-xs">WooCommerce</span></div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== SERVICES ====================== -->
+    <section class="py-24 relative z-10">
+        <!-- Ambient glow -->
+        <div class="absolute bottom-0 right-1/4 w-[400px] h-[300px] bg-fuchsia-700/10 blur-[100px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Header + real image split -->
+            <div class="grid lg:grid-cols-2 gap-16 items-center mb-16">
+                <div data-aos="fade-right">
+                    <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Our Services</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4 leading-tight">
+                        Architecting Custom<br>Software & AI Platforms
+                    </h2>
+                    <p class="mt-6 text-gray-400 leading-relaxed">
+                        From AI chatbots and payment pipelines to React/Flutter cross-platform apps, our engineers align technology directly with your commercial goals.
+                    </p>
+                    <a href="{% url 'services' %}" class="inline-block mt-8 px-7 py-3.5 rounded-xl border border-purple-500/40 text-purple-300 text-sm font-semibold hover:bg-purple-500/10 transition-all duration-300">
+                        View All Services →
+                    </a>
+                </div>
+                <div data-aos="fade-left" class="relative group">
+                    <div class="absolute -inset-3 rounded-3xl bg-gradient-to-br from-fuchsia-600/25 to-purple-600/20 blur-2xl opacity-60 group-hover:opacity-90 transition-all duration-700 -z-10"></div>
+                    <div class="rounded-2xl overflow-hidden border border-purple-500/20 shadow-2xl">
+                        <img src="{% static 'images/services_dashboard.png' %}" alt="Software Development Dashboard" class="w-full h-[300px] object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div data-aos="fade-up" data-aos-delay="0" class="glass-card p-7 rounded-2xl group hover:border-purple-500/40 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 flex items-center justify-center mb-5 text-xl group-hover:scale-110 transition-transform duration-300">💬</div>
+                    <h3 class="font-bold text-lg text-white mb-2">AI Chatbot Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Intelligent context-aware AI chatbots for automated support and user engagement.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="80" class="glass-card p-7 rounded-2xl group hover:border-purple-500/40 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 flex items-center justify-center mb-5 text-xl group-hover:scale-110 transition-transform duration-300">🤖</div>
+                    <h3 class="font-bold text-lg text-white mb-2">Android App Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Beautiful, native, and high-performance Android mobile applications.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="160" class="glass-card p-7 rounded-2xl group hover:border-purple-500/40 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 flex items-center justify-center mb-5 text-xl group-hover:scale-110 transition-transform duration-300">🔌</div>
+                    <h3 class="font-bold text-lg text-white mb-2">API Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Secure, fast, scalable RESTful & GraphQL APIs for your business systems.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="240" class="glass-card p-7 rounded-2xl group hover:border-purple-500/40 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 flex items-center justify-center mb-5 text-xl group-hover:scale-110 transition-transform duration-300">⛓️</div>
+                    <h3 class="font-bold text-lg text-white mb-2">Blockchain Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Smart contracts, decentralized apps (dApps), and secure blockchain ledger systems.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="320" class="glass-card p-7 rounded-2xl group hover:border-purple-500/40 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 flex items-center justify-center mb-5 text-xl group-hover:scale-110 transition-transform duration-300">📱</div>
+                    <h3 class="font-bold text-lg text-white mb-2">iOS App Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Premium, optimized native Swift and Flutter mobile applications for Apple iOS.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="400" class="glass-card p-7 rounded-2xl group hover:border-purple-500/40 transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-purple-600/20 flex items-center justify-center mb-5 text-xl group-hover:scale-110 transition-transform duration-300">💻</div>
+                    <h3 class="font-bold text-lg text-white mb-2">Website Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Full-stack web applications, landing pages, and interactive digital portals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== TEAM SHOWCASE ====================== -->
+    <section class="py-20 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Right: Text -->
+                <div data-aos="fade-right">
+                    <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Our Team</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4 leading-tight">
+                        Powered By Elite<br>Engineers
+                    </h2>
+                    <p class="mt-6 text-gray-400 leading-relaxed">
+                        Our team consists of senior engineers, UI/UX designers, AI specialists, and project managers who have shipped products across 15+ countries.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 mt-8">
+                        <div class="glass-card rounded-xl p-4">
+                            <p class="text-2xl font-extrabold text-purple-400">Senior</p>
+                            <p class="text-gray-400 text-xs mt-1">Level Engineers Only</p>
+                        </div>
+                        <div class="glass-card rounded-xl p-4">
+                            <p class="text-2xl font-extrabold text-purple-400">15+</p>
+                            <p class="text-gray-400 text-xs mt-1">Countries Served</p>
+                        </div>
+                    </div>
+                    <a href="{% url 'team' %}" class="inline-block mt-8 px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn text-sm">
+                        Meet The Team →
+                    </a>
+                </div>
+                <!-- Left: Real Team Photo -->
+                <div data-aos="fade-left" class="relative group">
+                    <div class="absolute -inset-3 rounded-3xl bg-gradient-to-br from-purple-600/25 to-fuchsia-600/20 blur-2xl opacity-60 group-hover:opacity-90 transition-all duration-700 -z-10"></div>
+                    <div class="rounded-2xl overflow-hidden border border-purple-500/20 shadow-2xl">
+                        <img src="{% static 'images/hero_team.png' %}" alt="Onion Techs Development Team" class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        <!-- Overlay -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#030514]/70 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-5 left-5 right-5">
+                            <p class="text-white font-bold text-base">Onion Techs Engineering Team</p>
+                            <p class="text-purple-300 text-xs mt-1">Building the future, one commit at a time</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== CTA SECTION ====================== -->
+    <section id="contact-cta" class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/15 via-transparent to-fuchsia-900/10 pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Get In Touch</span>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4">
+                Ready To Build Your<br>Next Big Thing?
+            </h2>
+            <p class="text-gray-400 mt-6 max-w-2xl mx-auto leading-relaxed">
+                From AI solutions and enterprise software to mobile apps and web platforms — Onion Techs helps businesses turn ideas into scalable products.
+            </p>
+            <div class="mt-10 flex justify-center gap-4 flex-wrap">
+                <a href="mailto:info@oniontechs.com" class="inline-block bg-gradient-to-r from-purple-600 to-fuchsia-500 px-8 py-4 rounded-xl text-white font-semibold glow-btn text-sm">
+                    Start A Project →
+                </a>
+                <a href="{% url 'join_us' %}" class="inline-block border border-white/20 px-8 py-4 rounded-xl text-white font-semibold hover:bg-white/5 transition-all duration-300 text-sm">
+                    Join Our Team
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== TESTIMONIALS ====================== -->
+    <section class="py-20 relative z-10 border-t border-purple-500/10">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-purple-600/8 blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Testimonials</span>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4 mb-14">What Our Clients Say</h2>
+
+            <div class="relative glass-card rounded-3xl p-10 md:p-14 shadow-2xl max-w-3xl mx-auto text-left">
+                <!-- top accent line -->
+                <div class="absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-pink-500 rounded-t-3xl"></div>
+                <!-- Quote mark -->
+                <div class="text-7xl text-purple-500/25 font-serif leading-none mb-6 select-none">"</div>
+
+                <div id="testimonial-slider-container" class="min-h-[180px] flex flex-col justify-center" style="transition: opacity 0.5s ease, transform 0.5s ease;">
+                    <!-- filled by JS -->
+                </div>
+
+                <div class="flex items-center justify-between mt-10">
+                    <!-- Dots -->
+                    <div id="testimonial-dots" class="flex gap-2"></div>
+                    <!-- Buttons -->
+                    <div class="flex gap-3">
+                        <button id="testimonial-prev" class="w-11 h-11 rounded-full border border-purple-500/25 hover:border-purple-500/60 text-gray-400 hover:text-white transition-all duration-200 flex items-center justify-center" title="Previous">←</button>
+                        <button id="testimonial-next" class="w-11 h-11 rounded-full border border-purple-500/25 hover:border-purple-500/60 text-gray-400 hover:text-white transition-all duration-200 flex items-center justify-center" title="Next">→</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== FAQ ====================== -->
+    <section class="py-20 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">FAQ</span>
+                <h2 class="text-4xl font-extrabold text-white mt-4">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-4">
+                <details class="glass-card rounded-2xl p-6 group cursor-pointer">
+                    <summary class="font-bold text-white list-none flex justify-between items-center">
+                        What technologies do you use?
+                        <span class="text-purple-400 group-open:rotate-45 transition-transform duration-300 text-xl">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">We work with a modern stack including Django, Node.js, React, Vue, Laravel, Python, Flutter, Shopify, WordPress, and WooCommerce — plus AI/ML frameworks like TensorFlow and LangChain.</p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-6 group cursor-pointer">
+                    <summary class="font-bold text-white list-none flex justify-between items-center">
+                        Do you provide maintenance after launch?
+                        <span class="text-purple-400 group-open:rotate-45 transition-transform duration-300 text-xl">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">Yes, we provide dedicated long-term technical support, updates, hosting support, and custom feature additions under SLA agreements.</p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-6 group cursor-pointer">
+                    <summary class="font-bold text-white list-none flex justify-between items-center">
+                        Can I hire dedicated developers?
+                        <span class="text-purple-400 group-open:rotate-45 transition-transform duration-300 text-xl">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">Absolutely. We can assign dedicated tech professionals to work seamlessly as an extension of your in-house product team — full-time or part-time.</p>
+                </details>
+
+                <details class="glass-card rounded-2xl p-6 group cursor-pointer">
+                    <summary class="font-bold text-white list-none flex justify-between items-center">
+                        How long does a typical project take?
+                        <span class="text-purple-400 group-open:rotate-45 transition-transform duration-300 text-xl">+</span>
+                    </summary>
+                    <p class="mt-4 text-gray-400 text-sm leading-relaxed">A simple landing page takes 1-2 weeks. A full web application typically takes 6-14 weeks depending on complexity and requirements. We always provide an accurate timeline before starting.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====================== PAGE STYLES ====================== -->
+    <style>
+        /* Hero floating badges */
+        .hero-float-badge {
+            position: absolute;
+            padding: 6px 14px;
+            background: rgba(10, 13, 48, 0.8);
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #e2e8f0;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            box-shadow: 0 4px 24px rgba(168, 85, 247, 0.2);
+            animation: floatBadge 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 20;
+        }
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Terminal animation colors */
+        .term-prompt { color: #a855f7; }
+        .term-cmd    { color: #e2e8f0; }
+        .term-output { color: #4ade80; }
+        .term-comment { color: #6b7280; }
+        .term-error  { color: #f87171; }
+        .term-string { color: #fb923c; }
+        .term-keyword { color: #60a5fa; }
+
+        /* FAQ details arrow */
+        details summary::-webkit-details-marker { display: none; }
+
+        /* Ambient smoke retained */
+        #smoke-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .smoke { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.30; will-change: transform; }
+        .smoke-1 { width:600px;height:600px; top:-10%;left:-10%; background:radial-gradient(circle,rgba(168,85,247,0.5),transparent 70%); animation:drift1 28s ease-in-out infinite; }
+        .smoke-2 { width:700px;height:700px; top:30%;right:-15%; background:radial-gradient(circle,rgba(236,72,153,0.4),transparent 70%); animation:drift2 34s ease-in-out infinite; }
+        .smoke-3 { width:550px;height:550px; bottom:-10%;left:20%; background:radial-gradient(circle,rgba(124,58,237,0.4),transparent 70%); animation:drift3 30s ease-in-out infinite; }
+        .smoke-4 { width:480px;height:480px; top:55%;left:45%; background:radial-gradient(circle,rgba(217,70,239,0.3),transparent 70%); animation:drift4 26s ease-in-out infinite; }
+        @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(120px,80px) scale(1.15)}}
+        @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-100px,60px) scale(1.1)}}
+        @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(80px,-100px) scale(1.2)}}
+        @keyframes drift4{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-70px,-70px) scale(0.9)}}
+        @media(max-width:768px){.smoke-1{width:380px;height:380px}.smoke-2{width:420px;height:420px}.smoke-3{width:350px;height:350px}.smoke-4{display:none}}
+        @media(prefers-reduced-motion:reduce){.smoke,.hero-float-badge{animation:none}}
+    </style>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+/* =============================================================
+   HERO TERMINAL ANIMATION
+   Simulates a developer running commands in a terminal
+============================================================= */
+(function() {
+    const output = document.getElementById('terminal-output');
+    if (!output) return;
+
+    const lines = [
+        { text: '$ git clone https://github.com/oniontechs/app.git', type: 'prompt', delay: 0 },
+        { text: 'Cloning into \'app\'... done.', type: 'output', delay: 700 },
+        { text: '', type: 'blank', delay: 900 },
+        { text: '$ cd app && npm install', type: 'prompt', delay: 1000 },
+        { text: 'added 847 packages in 3.4s', type: 'output', delay: 1800 },
+        { text: '', type: 'blank', delay: 2000 },
+        { text: '$ python manage.py migrate', type: 'prompt', delay: 2100 },
+        { text: '  Applying migrations... OK ✓', type: 'output', delay: 2900 },
+        { text: '', type: 'blank', delay: 3100 },
+        { text: '$ npm run build', type: 'prompt', delay: 3200 },
+        { text: '  webpack compiled successfully', type: 'output', delay: 4200 },
+        { text: '', type: 'blank', delay: 4400 },
+        { text: '$ python manage.py runserver', type: 'prompt', delay: 4500 },
+        { text: '  Starting server at http://localhost:8000', type: 'success', delay: 5300 },
+        { text: '  ✓ Ready to serve the world 🌍', type: 'success', delay: 5800 },
+    ];
+
+    const colorMap = {
+        prompt:  '<span class="term-prompt">$ </span><span class="term-cmd">',
+        output:  '<span class="term-comment">',
+        success: '<span class="term-output">',
+        blank:   '<span>',
+    };
+
+    let lineIndex = 0;
+
+    function addLine() {
+        if (lineIndex >= lines.length) {
+            // Loop: clear and restart after pause
+            setTimeout(() => {
+                output.innerHTML = '';
+                lineIndex = 0;
+                addLine();
+            }, 4000);
+            return;
+        }
+
+        const line = lines[lineIndex];
+        const span = colorMap[line.type];
+        const div = document.createElement('div');
+        div.innerHTML = span + (line.text.startsWith('$ ') ? line.text.slice(2) : line.text) + '</span>';
+        div.style.opacity = '0';
+        div.style.transform = 'translateY(4px)';
+        div.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        output.appendChild(div);
+
+        // Scroll to bottom
+        output.scrollTop = output.scrollHeight;
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                div.style.opacity = '1';
+                div.style.transform = 'translateY(0)';
+            });
+        });
+
+        lineIndex++;
+        const nextLine = lines[lineIndex];
+        const nextDelay = nextLine ? (nextLine.delay - line.delay) : 1000;
+        setTimeout(addLine, Math.max(nextDelay, 200));
+    }
+
+    // Start after short initial pause
+    setTimeout(addLine, 600);
+})();
+</script>
+
+<script>
+/* =============================================================
+   TESTIMONIAL SLIDER with dot indicators
+============================================================= */
+(function() {
+    const testimonials = [
+        {
+            quote: "Onion Techs delivered our custom telehealth platform on time. Their backend architecture with Django and billing integration was solid, scalable, and extremely secure.",
+            author: "Dr. Adrian O'Connor",
+            role: "Founder, ConnectDoc",
+            rating: 5
+        },
+        {
+            quote: "The web development team is outstanding. They restructured our Shopify and WooCommerce platforms, optimizing loading speed by 50% and doubling conversion rates.",
+            author: "Sarah Jenkins",
+            role: "Director of Operations, Glamour & Co",
+            rating: 5
+        },
+        {
+            quote: "Their AI chatbots and custom LLM integrations have automated our client onboarding completely. Onion Techs engineers are highly professional and technically superior.",
+            author: "David Vance",
+            role: "VP of Product, FinVerify",
+            rating: 5
+        },
+        {
+            quote: "We hired dedicated developers for our React Native app. The codebase is clean, well-tested, and their support is always prompt. Highly recommended!",
+            author: "Klaus Weber",
+            role: "CTO, NextGen Logistics",
+            rating: 5
+        }
+    ];
+
+    const container = document.getElementById('testimonial-slider-container');
+    const dotsWrap  = document.getElementById('testimonial-dots');
+    const prevBtn   = document.getElementById('testimonial-prev');
+    const nextBtn   = document.getElementById('testimonial-next');
+    if (!container) return;
+
+    let current  = 0;
+    let timer    = null;
+
+    // Build dots
+    testimonials.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-purple-500 w-5' : 'bg-white/20');
+        d.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(d);
+    });
+
+    function updateDots() {
+        dotsWrap.querySelectorAll('button').forEach((d, i) => {
+            d.className = 'h-2 rounded-full transition-all duration-300 ' + (i === current ? 'bg-purple-500 w-5' : 'bg-white/20 w-2');
+        });
+    }
+
+    function render() {
+        const t = testimonials[current];
+        const stars = '⭐'.repeat(t.rating);
+        container.style.opacity = '0';
+        container.style.transform = 'translateY(8px)';
+        setTimeout(() => {
+            container.innerHTML = `
+                <div class="text-yellow-400 text-lg mb-4">${stars}</div>
+                <p class="text-lg md:text-xl text-gray-200 italic leading-relaxed">"${t.quote}"</p>
+                <div class="flex items-center gap-4 mt-7">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">${t.author[0]}</div>
+                    <div>
+                        <p class="font-bold text-white text-sm">${t.author}</p>
+                        <p class="text-purple-400 text-xs mt-0.5">${t.role}</p>
+                    </div>
+                </div>
+            `;
+            container.style.opacity = '1';
+            container.style.transform = 'translateY(0)';
+        }, 250);
+        updateDots();
+    }
+
+    function goTo(index) {
+        current = (index + testimonials.length) % testimonials.length;
+        render();
+        resetTimer();
+    }
+
+    function resetTimer() {
+        clearInterval(timer);
+        timer = setInterval(() => goTo(current + 1), 6000);
+    }
+
+    prevBtn && prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn && nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    render();
+    resetTimer();
+})();
+</script>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ seo.meta_title|default:"Our Services | Onion Techs" }}{% endblock %}
+{% block meta_description %}{{ seo.meta_description|default:"Web development, mobile apps, AI, cloud, blockchain and more." }}{% endblock %}
+
+{% block content %}
+
+    <!-- ===== HERO ===== -->
+    <section class="relative pt-40 pb-24 overflow-hidden z-10">
+        <div class="absolute top-20 left-0 w-96 h-96 bg-purple-700/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-fuchsia-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="grid lg:grid-cols-2 gap-14 items-center">
+                <div data-aos="fade-right">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-purple-500/40 bg-purple-500/10 text-purple-300 text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+                        What We Build
+                    </div>
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-[1.05] tracking-tight">
+                        Engineering Services<br>
+                        <span class="gradient-text">That Scale With You</span>
+                    </h1>
+                    <p class="mt-7 text-gray-400 text-lg leading-relaxed max-w-xl">
+                        From full-stack web platforms to mobile apps, AI integrations, and cloud infrastructure — we deliver software that grows with your business.
+                    </p>
+                    <div class="flex flex-wrap gap-4 mt-10">
+                        <a href="#services" class="px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn text-sm">
+                            Explore Services →
+                        </a>
+                        <a href="mailto:info@oniontechs.com" class="px-8 py-4 rounded-xl border border-white/20 text-white font-semibold text-sm hover:bg-white/5 transition-all duration-300">
+                            Get a Quote
+                        </a>
+                    </div>
+                </div>
+                <div data-aos="fade-left" class="relative flex justify-center">
+                    <div class="absolute -inset-6 rounded-3xl bg-gradient-to-br from-purple-700/20 via-fuchsia-600/10 to-transparent blur-3xl pointer-events-none"></div>
+                    <div class="relative w-full max-w-[540px] rounded-2xl overflow-hidden border border-purple-500/20 shadow-2xl shadow-purple-900/30 floating">
+                        <img src="{% static 'images/Gemini_Generated_Image_maqmzbmaqmzbmaqm.png' %}" alt="Services Illustration" class="w-full h-auto object-cover" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CORE SERVICES ===== -->
+    <section id="services" class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Our Expertise</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4">Core Development Services</h2>
+                <p class="text-gray-400 mt-5 max-w-2xl mx-auto">Modern stacks, battle-tested processes, and an obsession with performance.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+                {% for service in services %}
+                <div data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00" class="glass-card p-8 rounded-2xl group flex flex-col">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
+                        {{ service.icon }}
+                    </div>
+                    <h3 class="font-bold text-xl text-white">{{ service.title }}</h3>
+                    <p class="text-gray-400 text-sm mt-3 leading-relaxed flex-grow">{{ service.short_description }}</p>
+                    <a href="{% url 'service_detail' service.slug %}"
+                       class="mt-6 inline-flex items-center gap-2 text-purple-400 text-sm font-semibold hover:text-purple-300 transition group-hover:gap-3">
+                        Learn More <span class="transition-all">→</span>
+                    </a>
+                </div>
+                {% empty %}
+                <div class="col-span-3 text-center py-20 text-gray-400">
+                    <p class="text-2xl mb-3">🔧</p>
+                    <p>Services coming soon — check back shortly.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">How We Work</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4">From Idea To Production</h2>
+                <p class="text-gray-400 mt-5 max-w-2xl mx-auto">A simple, transparent, four-step process designed to ship quality software predictably.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for step in "01,02,03,04"|split:"," %}{% endfor %}
+                <div data-aos="fade-up" data-aos-delay="0"   class="glass-card p-8 rounded-2xl text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-br from-purple-600 to-fuchsia-500 mb-5 shadow-lg shadow-purple-700/30">01</div>
+                    <h4 class="font-bold text-xl text-white">Discover</h4>
+                    <p class="text-sm text-gray-400 mt-3 leading-relaxed">We dig into your business goals, users, and technical constraints to define the right scope.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="glass-card p-8 rounded-2xl text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-br from-purple-600 to-fuchsia-500 mb-5 shadow-lg shadow-purple-700/30">02</div>
+                    <h4 class="font-bold text-xl text-white">Design</h4>
+                    <p class="text-sm text-gray-400 mt-3 leading-relaxed">Interactive Figma wireframes and pixel-perfect design systems built around your brand.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="glass-card p-8 rounded-2xl text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-br from-purple-600 to-fuchsia-500 mb-5 shadow-lg shadow-purple-700/30">03</div>
+                    <h4 class="font-bold text-xl text-white">Build</h4>
+                    <p class="text-sm text-gray-400 mt-3 leading-relaxed">Agile sprints with continuous testing, regular demos, and transparent progress reporting.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="glass-card p-8 rounded-2xl text-center group">
+                    <div class="w-14 h-14 mx-auto rounded-full flex items-center justify-center font-bold text-white bg-gradient-to-br from-purple-600 to-fuchsia-500 mb-5 shadow-lg shadow-purple-700/30">04</div>
+                    <h4 class="font-bold text-xl text-white">Ship</h4>
+                    <p class="text-sm text-gray-400 mt-3 leading-relaxed">Production deployment, performance tuning, observability setup, and post-launch support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== STATS STRIP ===== -->
+    <section class="py-16 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="rounded-3xl px-8 md:px-12 py-10 glass-card flex flex-col md:flex-row items-center justify-around gap-8 text-center">
+                <div data-aos="fade-up" data-aos-delay="0">
+                    <p class="text-4xl md:text-5xl font-extrabold gradient-text">50+</p>
+                    <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Projects Shipped</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <p class="text-4xl md:text-5xl font-extrabold gradient-text">15+</p>
+                    <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Countries Served</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <p class="text-4xl md:text-5xl font-extrabold gradient-text">7+</p>
+                    <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Senior Engineers</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <p class="text-4xl md:text-5xl font-extrabold gradient-text">98%</p>
+                    <p class="text-gray-400 text-xs mt-2 uppercase tracking-widest">Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div data-aos="zoom-in" class="rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 border border-purple-500/25 bg-gradient-to-br from-[#0d1033] via-[#0a0f2e] to-[#0d1033] text-white shadow-2xl shadow-purple-900/30 relative overflow-hidden">
+                <div class="absolute -top-20 -right-20 w-72 h-72 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="relative">
+                    <h3 class="text-3xl md:text-4xl font-extrabold leading-tight">Ready to start your project?</h3>
+                    <p class="mt-3 text-gray-400 max-w-xl">Tell us about your goals and we'll engineer a tailored software solution for your business.</p>
+                </div>
+                <a href="mailto:info@oniontechs.com" class="relative flex-shrink-0 px-8 py-4 rounded-xl bg-gradient-to-r from-purple-600 to-fuchsia-500 text-white font-semibold glow-btn whitespace-nowrap">
+                    Contact Us →
+                </a>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

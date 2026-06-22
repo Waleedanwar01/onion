@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us | Onion Techs{% endblock %}
+{% block meta_description %}Learn about Onion Techs — a network of elite technology professionals delivering world-class software development, AI, and digital transformation services.{% endblock %}
+
+{% block content %}
+
+    <!-- ===== ABOUT HERO ===== -->
+    <section class="relative pt-40 pb-28 overflow-hidden z-10">
+        <!-- Glow -->
+        <div class="absolute top-20 left-0 w-96 h-96 bg-purple-700/20 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-0 right-0 w-80 h-80 bg-fuchsia-600/15 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <span class="inline-block px-5 py-2 bg-purple-500/15 text-purple-300 rounded-full text-xs font-semibold uppercase tracking-widest border border-purple-500/25 mb-6">
+                About Onion Techs
+            </span>
+            <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight">
+                Building Technology<br>
+                <span class="gradient-text">That Drives Growth</span>
+            </h1>
+            <p class="max-w-2xl mx-auto mt-8 text-gray-400 text-lg leading-relaxed">
+                Onion Techs is a technology network of skilled professionals delivering modern software solutions, mobile applications, AI systems, and digital transformation services worldwide.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== COMPANY STORY ===== -->
+    <section class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right" class="relative group">
+                    <div class="absolute -inset-3 rounded-3xl bg-gradient-to-br from-purple-600/25 to-fuchsia-600/15 blur-2xl opacity-60 group-hover:opacity-90 transition-all duration-700 -z-10"></div>
+                    <div class="rounded-2xl overflow-hidden border border-purple-500/20 shadow-2xl">
+                        <img src="{% static 'images/about_office.png' %}" alt="Onion Techs Office" class="w-full h-[380px] object-cover group-hover:scale-105 transition-transform duration-700">
+                    </div>
+                </div>
+                <div data-aos="fade-left">
+                    <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Our Story</span>
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mt-4 leading-tight">
+                        A Network Built On Innovation
+                    </h2>
+                    <p class="mt-6 text-gray-400 leading-relaxed">
+                        Founded with a vision to connect talented technology professionals under one trusted brand, Onion Techs has grown into a strong network delivering software solutions for startups, businesses, and enterprises globally.
+                    </p>
+                    <p class="mt-4 text-gray-400 leading-relaxed">
+                        Our team works across multiple technologies and industries, helping organizations build secure, scalable, and modern digital products.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== VISION & MISSION ===== -->
+    <section class="py-20 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div data-aos="fade-up" data-aos-delay="0" class="glass-card p-10 rounded-2xl">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 flex items-center justify-center text-2xl mb-6">🚀</div>
+                    <h3 class="text-2xl font-extrabold text-white">Our Vision</h3>
+                    <p class="mt-5 text-gray-400 leading-relaxed">
+                        To become a globally recognized technology network empowering businesses through innovation, collaboration, and digital excellence.
+                    </p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="120" class="glass-card p-10 rounded-2xl">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 flex items-center justify-center text-2xl mb-6">🎯</div>
+                    <h3 class="text-2xl font-extrabold text-white">Our Mission</h3>
+                    <p class="mt-5 text-gray-400 leading-relaxed">
+                        To provide reliable software development, AI solutions, mobile applications, and technology consulting that help businesses grow efficiently and securely.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== JOURNEY TIMELINE ===== -->
+    <section class="py-24 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">Our Journey</span>
+                <h2 class="text-4xl font-extrabold text-white mt-4">3 Years Of Growth</h2>
+            </div>
+
+            <div class="relative">
+                <!-- Vertical line -->
+                <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-purple-600 via-fuchsia-600 to-transparent"></div>
+
+                <div class="space-y-12">
+                    <div data-aos="fade-right" class="flex gap-8 items-start">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-500 text-white flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-lg shadow-purple-700/30">2022</div>
+                        <div class="glass-card rounded-2xl p-6 flex-1">
+                            <h3 class="text-xl font-bold text-white">Company Foundation</h3>
+                            <p class="text-gray-400 mt-2 text-sm leading-relaxed">Started with a small team of skilled technology professionals with a shared vision to build world-class software solutions.</p>
+                        </div>
+                    </div>
+                    <div data-aos="fade-right" data-aos-delay="100" class="flex gap-8 items-start">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-500 text-white flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-lg shadow-purple-700/30">2023</div>
+                        <div class="glass-card rounded-2xl p-6 flex-1">
+                            <h3 class="text-xl font-bold text-white">Service Expansion</h3>
+                            <p class="text-gray-400 mt-2 text-sm leading-relaxed">Expanded into AI, blockchain, and cloud technologies. Delivered 30+ successful projects across Pakistan and Europe.</p>
+                        </div>
+                    </div>
+                    <div data-aos="fade-right" data-aos-delay="200" class="flex gap-8 items-start">
+                        <div class="w-16 h-16 rounded-full bg-gradient-to-br from-purple-600 to-fuchsia-500 text-white flex items-center justify-center font-bold text-sm flex-shrink-0 shadow-lg shadow-purple-700/30">2024</div>
+                        <div class="glass-card rounded-2xl p-6 flex-1">
+                            <h3 class="text-xl font-bold text-white">Growing Network</h3>
+                            <p class="text-gray-400 mt-2 text-sm leading-relaxed">Reached 55+ projects delivered, expanded team to 7+ senior engineers, and began serving clients in 15+ countries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CORE VALUES ===== -->
+    <section class="py-20 relative z-10 border-t border-purple-500/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-14">
+                <span class="text-purple-400 font-semibold uppercase tracking-widest text-xs">What We Stand For</span>
+                <h2 class="text-4xl font-extrabold text-white mt-4">Our Core Values</h2>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div data-aos="fade-up" data-aos-delay="0"   class="glass-card p-8 rounded-2xl text-center group hover:border-purple-500/40">
+                    <div class="text-4xl mb-4">💡</div>
+                    <h3 class="text-xl font-bold text-white">Innovation</h3>
+                    <p class="text-gray-400 text-sm mt-3">Constantly pushing boundaries with modern technologies and creative solutions.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="100" class="glass-card p-8 rounded-2xl text-center group hover:border-purple-500/40">
+                    <div class="text-4xl mb-4">🛡️</div>
+                    <h3 class="text-xl font-bold text-white">Integrity</h3>
+                    <p class="text-gray-400 text-sm mt-3">Transparent communication, honest pricing, and keeping every promise we make.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200" class="glass-card p-8 rounded-2xl text-center group hover:border-purple-500/40">
+                    <div class="text-4xl mb-4">🤝</div>
+                    <h3 class="text-xl font-bold text-white">Collaboration</h3>
+                    <p class="text-gray-400 text-sm mt-3">Working closely with clients and each other to deliver outcomes that matter.</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300" class="glass-card p-8 rounded-2xl text-center group hover:border-purple-500/40">
+                    <div class="text-4xl mb-4">🏆</div>
+                    <h3 class="text-xl font-bold text-white">Excellence</h3>
+                    <p class="text-gray-400 text-sm mt-3">We don't settle for good enough — every line of code reflects our commitment to quality.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
