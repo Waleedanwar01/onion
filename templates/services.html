@@ -54,16 +54,33 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
                 {% for service in services %}
-                <div data-aos="fade-up" data-aos-delay="{{ forloop.counter0 }}00" class="glass-card p-8 rounded-2xl group flex flex-col">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-600/20 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                        {{ service.icon }}
+                <div data-aos="fade-up" data-aos-delay="{{ forloop.counter0|add:1 }}00" class="glass-card rounded-3xl group flex flex-col overflow-hidden relative border border-purple-500/10 shadow-lg shadow-purple-900/10">
+                    <!-- Image Area -->
+                    <div class="h-52 relative overflow-hidden">
+                        {% if service.cover_image %}
+                        <img src="{{ service.cover_image.url }}" alt="{{ service.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        {% else %}
+                        <!-- Tech Placeholder -->
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80" alt="{{ service.title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 opacity-70 mix-blend-overlay">
+                        {% endif %}
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0a0f2e] via-[#0a0f2e]/40 to-transparent"></div>
+                        <div class="absolute bottom-4 left-6 w-14 h-14 rounded-2xl bg-purple-600/40 backdrop-blur-md flex items-center justify-center text-3xl border border-white/20 group-hover:-translate-y-2 group-hover:bg-fuchsia-600/60 group-hover:shadow-[0_0_20px_rgba(192,38,211,0.5)] transition-all duration-300">
+                            {{ service.icon }}
+                        </div>
                     </div>
-                    <h3 class="font-bold text-xl text-white">{{ service.title }}</h3>
-                    <p class="text-gray-400 text-sm mt-3 leading-relaxed flex-grow">{{ service.short_description }}</p>
-                    <a href="{% url 'service_detail' service.slug %}"
-                       class="mt-6 inline-flex items-center gap-2 text-purple-400 text-sm font-semibold hover:text-purple-300 transition group-hover:gap-3">
-                        Learn More <span class="transition-all">→</span>
-                    </a>
+                    
+                    <!-- Content Area -->
+                    <div class="p-8 pt-6 flex flex-col flex-grow bg-gradient-to-b from-[#0a0f2e] to-transparent">
+                        <h3 class="font-extrabold text-2xl text-white group-hover:text-fuchsia-400 transition-colors">{{ service.title }}</h3>
+                        <p class="text-gray-400 text-sm mt-4 leading-relaxed flex-grow">{{ service.short_description }}</p>
+                        
+                        <div class="mt-8 pt-5 border-t border-purple-500/10 flex items-center justify-between">
+                            <a href="{% url 'service_detail' service.slug %}"
+                               class="inline-flex items-center gap-2 text-fuchsia-400 text-sm font-bold hover:text-fuchsia-300 transition group-hover:gap-3 w-full">
+                                Explore Details <span class="transition-all ml-auto">→</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
                 {% empty %}
                 <div class="col-span-3 text-center py-20 text-gray-400">

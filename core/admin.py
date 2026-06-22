@@ -182,17 +182,17 @@ class JobOpeningAdmin(admin.ModelAdmin):
 # ══════════════════════════════════════════════════════════════════
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display       = ('icon_col', 'title', 'slug', 'order', 'is_active', 'og_image_preview')
+    list_display       = ('icon_col', 'title', 'slug', 'order', 'is_active', 'cover_image_preview')
     list_display_links = ('icon_col', 'title')
     list_editable      = ('order', 'is_active')
     search_fields      = ('title', 'short_description', 'meta_title')
     prepopulated_fields = {'slug': ('title',)}
-    readonly_fields    = ('og_image_preview',)
+    readonly_fields    = ('og_image_preview', 'cover_image_preview')
 
     fieldsets = (
         ('Service Info', {
             'description': 'Basic information shown on the Services listing page and detail page.',
-            'fields': ('title', 'slug', 'icon', 'order', 'is_active'),
+            'fields': ('title', 'slug', 'icon', 'cover_image', 'cover_image_preview', 'order', 'is_active'),
         }),
         ('Content', {
             'fields': ('short_description', 'full_description', 'features'),
@@ -222,4 +222,10 @@ class ServiceAdmin(admin.ModelAdmin):
     def og_image_preview(self, obj):
         if obj.og_image:
             return format_html('<img src="{}" style="height:60px;border-radius:6px;"/>', obj.og_image.url)
+        return format_html('<span style="color:#94a3b8;font-size:12px;">No image</span>')
+
+    @admin.display(description='Cover Image')
+    def cover_image_preview(self, obj):
+        if obj.cover_image:
+            return format_html('<img src="{}" style="height:60px;border-radius:6px;"/>', obj.cover_image.url)
         return format_html('<span style="color:#94a3b8;font-size:12px;">No image</span>')

@@ -36,10 +36,12 @@ def service_detail(request, slug):
 def team(request):
     leadership = TeamMember.objects.filter(category='leadership', is_active=True).order_by('order')
     core       = TeamMember.objects.filter(category='core',       is_active=True).order_by('order')
+    interns    = TeamMember.objects.filter(category='internship', is_active=True).order_by('order')
     return render(request, 'team.html', {
         'seo': _get_seo('team'),
         'leadership_members': leadership,
         'core_members': core,
+        'intern_members': interns,
     })
 
 

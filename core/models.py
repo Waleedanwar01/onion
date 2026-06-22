@@ -67,6 +67,7 @@ class TeamMember(models.Model):
     CATEGORY_CHOICES = [
         ('leadership', 'Leadership Team'),
         ('core',       'Core Team'),
+        ('internship', 'Interns / Trainees'),
     ]
 
     name          = models.CharField(max_length=100, verbose_name='Full Name')
@@ -153,6 +154,12 @@ class Service(models.Model):
         max_length=10, default='💻',
         verbose_name='Icon (Emoji)',
         help_text='Single emoji used as the service icon.',
+    )
+    cover_image       = models.ImageField(
+        upload_to='services/covers/',
+        blank=True, null=True,
+        verbose_name='Cover Image',
+        help_text='High quality image for the service card.',
     )
     short_description = models.TextField(
         max_length=250,

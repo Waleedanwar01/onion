@@ -99,11 +99,43 @@
     <!-- ======== FOOTER ======== -->
     {% include 'includes/footer.html' %}
 
+    <!-- GO TO TOP BUTTON -->
+    <button id="goToTopBtn" aria-label="Go to top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-gradient-to-tr from-purple-600 to-fuchsia-500 text-white shadow-[0_0_20px_rgba(192,38,211,0.5)] border border-white/20 flex items-center justify-center opacity-0 translate-y-10 pointer-events-none transition-all duration-300 z-50 hover:scale-110 hover:-translate-y-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
     <!-- AOS JS -->
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 
     <!-- Global Script -->
     <script src="{% static 'js/script.js' %}"></script>
+
+    <script>
+        // Go to top button functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const goToTopBtn = document.getElementById('goToTopBtn');
+            if (goToTopBtn) {
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 400) {
+                        goToTopBtn.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                        goToTopBtn.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                    } else {
+                        goToTopBtn.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                        goToTopBtn.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                    }
+                });
+                
+                goToTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        });
+    </script>
 
     {% block extra_js %}{% endblock %}
 </body>
