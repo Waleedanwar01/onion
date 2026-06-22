@@ -134,3 +134,27 @@ MEDIA_ROOT = BASE_DIR / "media"
 # DEFAULT AUTO FIELD
 # -------------------
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# -------------------
+# PRODUCTION SECURITY SETTINGS
+# -------------------
+if not DEBUG:
+    # HSTS settings
+    SECURE_HSTS_SECONDS = config("SECURE_HSTS_SECONDS", default=31536000, cast=int)
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = config("SECURE_HSTS_INCLUDE_SUBDOMAINS", default=True, cast=bool)
+    SECURE_HSTS_PRELOAD = config("SECURE_HSTS_PRELOAD", default=True, cast=bool)
+
+    # Secure cookies and redirects
+    SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", default=True, cast=bool)
+    SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", default=True, cast=bool)
+    CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=True, cast=bool)
+
+    # Secure HTTP Headers
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_REFERRER_POLICY = "same-origin"
+    X_FRAME_OPTIONS = "DENY"
+
+    # Proxy configuration for SSL detection behind proxy (Heroku/Render/AWS/etc.)
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

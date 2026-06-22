@@ -1,117 +1,332 @@
+"use strict";
 /**
- * Onion Techs — Global Frontend Controller
- * Handles: AOS, navbar scroll shrink, counter animation, typing effect, scroll reveals
+ * Onion Techs - Frontend TypeScript Controller
  */
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    /* =====================================================
-       1. AOS (Animate on Scroll) — initialize
-    ===================================================== */
-    if (typeof AOS !== 'undefined') {
-        AOS.init({
-            duration: 750,
-            once: true,
-            easing: 'ease-out-cubic',
-            offset: 60
+class OnionApp {
+    mobileOpenBtn = null;
+    mobileCloseBtn = null;
+    mobileOverlay = null;
+    mobileDrawer = null;
+    navbar = null;
+    typingElement = null;
+    testimonialContainer = null;
+    testimonials = [];
+    currentTestimonialIndex = 0;
+    testimonialInterval = null;
+    constructor() {
+        document.addEventListener("DOMContentLoaded", () => this.init());
+    }
+    init() {
+        console.log("OnionApp Initialized");
+        this.cacheElements();
+        this.setupMobileMenu();
+        this.setupNavbarScroll();
+        this.setupCounters();
+        this.setupAOS();
+        this.setupTypingEffect();
+        this.setupTestimonialSlider();
+        this.setupScrollAnimations();
+        this.setupSecureEmails();
+    }
+    cacheElements() {
+        this.mobileOpenBtn = document.getElementById("mobile-menu-open");
+        this.mobileCloseBtn = document.getElementById("mobile-menu-close");
+        this.mobileOverlay = document.getElementById("mobile-menu-overlay");
+        this.mobileDrawer = document.getElementById("mobile-menu-drawer");
+        this.navbar = document.querySelector("nav");
+        this.typingElement = document.getElementById("typing-text");
+        this.testimonialContainer = document.getElementById("testimonial-slider-container");
+    }
+    /**
+     * Mobile Menu Slide-in Drawer Animations
+     */
+    setupMobileMenu() {
+        if (!this.mobileOpenBtn || !this.mobileDrawer || !this.mobileOverlay)
+            return;
+        const openMenu = () => {
+            // Show Overlay
+            this.mobileOverlay.classList.remove("hidden");
+            // Force layout reflow
+            void this.mobileOverlay.offsetWidth;
+            this.mobileOverlay.classList.remove("opacity-0");
+            this.mobileOverlay.classList.add("opacity-100");
+            // Slide in Drawer
+            this.mobileDrawer.classList.remove("translate-x-full");
+            this.mobileDrawer.classList.add("translate-x-0");
+            // Prevent body scroll
+            document.body.style.overflow = "hidden";
+        };
+        const closeMenu = () => {
+            // Hide Overlay
+            this.mobileOverlay.classList.remove("opacity-100");
+            this.mobileOverlay.classList.add("opacity-0");
+            // Slide out Drawer
+            this.mobileDrawer.classList.remove("translate-x-0");
+            this.mobileDrawer.classList.add("translate-x-full");
+            // Allow body scroll
+            document.body.style.overflow = "";
+            // Hide overlay element fully after transition
+            setTimeout(() => {
+                this.mobileOverlay.classList.add("hidden");
+            }, 300);
+        };
+        this.mobileOpenBtn.addEventListener("click", openMenu);
+        if (this.mobileCloseBtn) {
+            this.mobileCloseBtn.addEventListener("click", closeMenu);
+        }
+        // Close on clicking backdrop overlay
+        this.mobileOverlay.addEventListener("click", closeMenu);
+        // Close mobile menu on clicking any links inside it
+        const links = this.mobileDrawer.querySelectorAll("a");
+        links.forEach(link => {
+            link.addEventListener("click", closeMenu);
         });
     }
-
-    /* =====================================================
-       2. Navbar Scroll Shrink Effect
-    ===================================================== */
-    const navbar = document.querySelector('nav');
-    if (navbar) {
-        const handleNavScroll = () => {
-            if (window.scrollY > 60) {
-                navbar.classList.add('top-2', 'shadow-2xl', 'bg-[#070B34]/98', 'border-purple-500/30');
-                navbar.classList.remove('top-4', 'bg-[#070B34]/85', 'border-purple-500/20');
-            } else {
-                navbar.classList.add('top-4', 'bg-[#070B34]/85', 'border-purple-500/20');
-                navbar.classList.remove('top-2', 'shadow-2xl', 'bg-[#070B34]/98', 'border-purple-500/30');
+    /**
+     * Dynamic Navbar Styling on Scroll (reduces padding, adds backdrop accent)
+     */
+    setupNavbarScroll() {
+        if (!this.navbar)
+            return;
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                this.navbar.classList.add("top-2", "w-[96%]", "shadow-2xl", "bg-[#070B34]/95", "border-purple-500/30");
+                this.navbar.classList.remove("top-4", "w-[92%]", "bg-[#070B34]/85", "border-purple-500/20");
             }
-        };
-        window.addEventListener('scroll', handleNavScroll, { passive: true });
+            else {
+                this.navbar.classList.add("top-4", "w-[92%]", "bg-[#070B34]/85", "border-purple-500/20");
+                this.navbar.classList.remove("top-2", "w-[96%]", "shadow-2xl", "bg-[#070B34]/95", "border-purple-500/30");
+            }
+        });
     }
-
-    /* =====================================================
-       3. Counter Animate-up on Scroll
-    ===================================================== */
-    const counters = document.querySelectorAll('.counter');
-    if (counters.length > 0) {
+    /**
+     * Statistics Counter Count-up Animation using IntersectionObserver
+     */
+    setupCounters() {
+        const counters = document.querySelectorAll(".counter");
+        if (counters.length === 0)
+            return;
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px"
+        };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                const el     = entry.target;
-                const target = Number(el.dataset.target || 0);
-                const suffix = el.dataset.suffix || (target >= 10 ? '+' : '');
-                const start  = performance.now();
-                const dur    = 2000;
-
-                const tick = (now) => {
-                    const prog = Math.min((now - start) / dur, 1);
-                    const ease = 1 - Math.pow(1 - prog, 3); // ease-out cubic
-                    el.textContent = Math.floor(ease * target) + (prog < 1 ? '' : suffix);
-                    if (prog < 1) requestAnimationFrame(tick);
-                };
-
-                requestAnimationFrame(tick);
-                observer.unobserve(el);
+                if (entry.isIntersecting) {
+                    const counter = entry.target;
+                    const target = Number(counter.dataset.target || 0);
+                    let current = 0;
+                    const duration = 2000; // 2 seconds animation duration
+                    const startTime = performance.now();
+                    const updateCounter = (currentTime) => {
+                        const elapsedTime = currentTime - startTime;
+                        const progress = Math.min(elapsedTime / duration, 1);
+                        // Ease-out quad function for smooth deceleration
+                        const easeProgress = progress * (2 - progress);
+                        counter.textContent = Math.floor(easeProgress * target).toString();
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        }
+                        else {
+                            counter.textContent = target.toString() + (target > 50 ? "+" : "");
+                        }
+                    };
+                    requestAnimationFrame(updateCounter);
+                    observer.unobserve(counter);
+                }
             });
-        }, { threshold: 0.2 });
-
-        counters.forEach(c => observer.observe(c));
+        }, observerOptions);
+        counters.forEach(counter => observer.observe(counter));
     }
-
-    /* =====================================================
-       4. Hero Typing Effect (if element exists)
-    ===================================================== */
-    const typingEl = document.getElementById('typing-text');
-    if (typingEl) {
-        const words   = ['Technology', 'Innovation', 'AI Solutions', 'Custom Software', 'The Future'];
-        let wIdx      = 0;
-        let cIdx      = 0;
-        let deleting  = false;
-        let speed     = 110;
-
+    /**
+     * AOS Initializer
+     */
+    setupAOS() {
+        // @ts-ignore
+        if (typeof AOS !== "undefined") {
+            // @ts-ignore
+            AOS.init({
+                duration: 800,
+                once: true,
+                easing: "ease-out-quad"
+            });
+        }
+    }
+    /**
+     * Typing animation effect for Hero section title
+     */
+    setupTypingEffect() {
+        if (!this.typingElement)
+            return;
+        const words = ["Technology", "Innovation", "Custom Software", "Expert Engineers", "AI Solutions"];
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
         const type = () => {
-            const word = words[wIdx];
-            if (deleting) {
-                cIdx--;
-                speed = 55;
-            } else {
-                cIdx++;
-                speed = 120;
+            const currentWord = words[wordIndex];
+            if (isDeleting) {
+                charIndex--;
+                typingSpeed = 50;
             }
-            typingEl.textContent = word.substring(0, cIdx);
-
-            if (!deleting && cIdx === word.length) {
-                deleting = true;
-                speed = 2200;
-            } else if (deleting && cIdx === 0) {
-                deleting = false;
-                wIdx = (wIdx + 1) % words.length;
-                speed = 500;
+            else {
+                charIndex++;
+                typingSpeed = 120;
             }
-            setTimeout(type, speed);
+            this.typingElement.textContent = currentWord.substring(0, charIndex);
+            if (!isDeleting && charIndex === currentWord.length) {
+                // Pause at complete word
+                isDeleting = true;
+                typingSpeed = 2000;
+            }
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typingSpeed = 500;
+            }
+            setTimeout(type, typingSpeed);
         };
         type();
     }
-
-    /* =====================================================
-       5. Generic .reveal scroll-in animation
-    ===================================================== */
-    const reveals = document.querySelectorAll('.reveal');
-    if (reveals.length > 0) {
-        const revealObs = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('active');
-                    revealObs.unobserve(e.target);
+    /**
+     * Testimonial Carousel Auto-playing slider
+     */
+    setupTestimonialSlider() {
+        this.testimonials = [
+            {
+                quote: "Onion Techs delivered our custom telehealth platform connectdoc.ie on time. Their backend architecture with Django and billing integration was solid, scalable, and extremely secure.",
+                author: "Dr. Adrian O'Connor",
+                role: "Founder, ConnectDoc",
+                rating: 5
+            },
+            {
+                quote: "The web development team is outstanding. They restructured our Shopify and WooCommerce e-commerce platforms, optimizing page loading speed by 50% and doubling conversion rates.",
+                author: "Sarah Jenkins",
+                role: "Director of Operations, Glamour & Co",
+                rating: 5
+            },
+            {
+                quote: "Their AI chatbots and custom LLM integrations have automated our client onboarding. Onion Techs engineers are highly professional, agile, and technically superior.",
+                author: "David Vance",
+                role: "VP of Product, FinVerify",
+                rating: 5
+            },
+            {
+                quote: "We hired their dedicated developers for our mobile app project in React Native. The codebase is clean, well-tested, and their support is prompt. Highly recommended!",
+                author: "Klaus Weber",
+                role: "CTO, NextGen Logistics",
+                rating: 5
+            }
+        ];
+        if (!this.testimonialContainer)
+            return;
+        this.renderTestimonial();
+        this.startTestimonialTimer();
+        // Add swipe/button event listeners
+        const prevBtn = document.getElementById("testimonial-prev");
+        const nextBtn = document.getElementById("testimonial-next");
+        if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+                this.stopTestimonialTimer();
+                this.currentTestimonialIndex = (this.currentTestimonialIndex - 1 + this.testimonials.length) % this.testimonials.length;
+                this.renderTestimonial();
+                this.startTestimonialTimer();
+            });
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+                this.stopTestimonialTimer();
+                this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.testimonials.length;
+                this.renderTestimonial();
+                this.startTestimonialTimer();
+            });
+        }
+    }
+    renderTestimonial() {
+        if (!this.testimonialContainer)
+            return;
+        const current = this.testimonials[this.currentTestimonialIndex];
+        let starsHTML = "";
+        for (let i = 0; i < current.rating; i++) {
+            starsHTML += "⭐";
+        }
+        // Fade animation during transitions
+        this.testimonialContainer.style.opacity = "0";
+        this.testimonialContainer.style.transform = "translateY(10px)";
+        setTimeout(() => {
+            this.testimonialContainer.innerHTML = `
+                <div class="text-yellow-400 text-2xl mb-4">${starsHTML}</div>
+                <p class="text-xl md:text-2xl text-gray-700 italic font-medium leading-relaxed">"${current.quote}"</p>
+                <div class="mt-8">
+                    <h4 class="font-bold text-lg text-[#070B34]">${current.author}</h4>
+                    <p class="text-purple-600 text-sm font-semibold uppercase mt-1 tracking-wider">${current.role}</p>
+                </div>
+            `;
+            this.testimonialContainer.style.opacity = "1";
+            this.testimonialContainer.style.transform = "translateY(0)";
+            this.testimonialContainer.style.transition = "all 0.5s ease-out";
+        }, 350);
+    }
+    startTestimonialTimer() {
+        this.testimonialInterval = window.setInterval(() => {
+            this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.testimonials.length;
+            this.renderTestimonial();
+        }, 6000);
+    }
+    stopTestimonialTimer() {
+        if (this.testimonialInterval) {
+            clearInterval(this.testimonialInterval);
+        }
+    }
+    /**
+     * Custom lightweight element reveal animations
+     */
+    setupScrollAnimations() {
+        const revealElements = document.querySelectorAll(".reveal");
+        if (revealElements.length === 0)
+            return;
+        const revealOnScroll = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                    revealOnScroll.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.12 });
-        reveals.forEach(el => revealObs.observe(el));
+        }, { threshold: 0.15 });
+        revealElements.forEach(el => revealOnScroll.observe(el));
     }
-
-});
+    /**
+     * Decode and render obfuscated email addresses safely in DOM to prevent bots scraping
+     */
+    setupSecureEmails() {
+        const secureEmails = document.querySelectorAll(".secure-email");
+        secureEmails.forEach(el => {
+            const htmlEl = el;
+            const u = htmlEl.dataset.u;
+            const d = htmlEl.dataset.d;
+            if (u && d) {
+                try {
+                    const decodedUser = atob(u);
+                    const decodedDomain = atob(d);
+                    const fullEmail = `${decodedUser}@${decodedDomain}`;
+                    if (htmlEl.tagName === "A") {
+                        const anchor = htmlEl;
+                        anchor.href = `mailto:${fullEmail}`;
+                        // If link has a default template placeholder/email, update text too
+                        if (anchor.textContent && (anchor.textContent.trim() === "Loading email..." || anchor.textContent.trim().includes("info@oniontechs.com"))) {
+                            anchor.textContent = fullEmail;
+                        }
+                    }
+                    else {
+                        htmlEl.textContent = fullEmail;
+                    }
+                }
+                catch (e) {
+                    console.error("Failed to decode secure email", e);
+                }
+            }
+        });
+    }
+}
+// Instantiate the application
+new OnionApp();

@@ -1,5 +1,54 @@
+import os
+from io import BytesIO
 from django.db import models
 from django.utils.text import slugify
+from django.core.files.base import ContentFile
+from PIL import Image
+
+def _optimize_image_field(field):
+    if not field or not field.name:
+        return
+    if field.name.lower().endswith('.webp'):
+        return
+    try:
+        img = Image.open(field)
+        output = BytesIO()
+        img.save(output, format='WEBP', quality=85, optimize=True)
+        output.seek(0)
+        
+        base_name = os.path.splitext(os.path.basename(field.name))[0]
+        new_name = f"{base_name}.webp"
+        
+        field.save(new_name, ContentFile(output.read()), save=False)
+    except Exception:
+        pass
+
+# ══════════════════════════════════════════════════════════════════
+# SITE SETTINGS (Global Configuration)
+# ══════════════════════════════════════════════════════════════════
+class SiteSettings(models.Model):
+    company_name = models.CharField(max_length=100, default='Onion Techs')
+    email        = models.EmailField(default='info@oniontechs.com')
+    phone        = models.CharField(max_length=30, blank=True, null=True, default='+1 (555) 123-4567')
+    address      = models.TextField(blank=True, null=True, default='123 Tech Street, Silicon Valley, CA')
+    
+    # Social Links
+    facebook_url  = models.URLField(blank=True, null=True)
+    twitter_url   = models.URLField(blank=True, null=True)
+    linkedin_url  = models.URLField(blank=True, null=True)
+    instagram_url = models.URLField(blank=True, null=True)
+    github_url    = models.URLField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Site Setting'
+        verbose_name_plural = 'Site Settings'
+
+    def __str__(self):
+        return "Global Site Settings"
+
+    def save(self, *args, **kwargs):
+        self.pk = 1  # Force it to be a singleton
+        super(SiteSettings, self).save(*args, **kwargs)
 
 
 # ══════════════════════════════════════════════════════════════════
@@ -59,6 +108,11 @@ class PageSEO(models.Model):
     def __str__(self):
         return f'{self.get_page_name_display()} — SEO'
 
+    def save(self, *args, **kwargs):
+        _optimize_image_field(self.og_image)
+        _optimize_image_field(self.twitter_image)
+        super().save(*args, **kwargs)
+
 
 # ══════════════════════════════════════════════════════════════════
 # TEAM MEMBERS
@@ -98,6 +152,10 @@ class TeamMember(models.Model):
 
     def __str__(self):
         return f'{self.name} — {self.role}'
+
+    def save(self, *args, **kwargs):
+        _optimize_image_field(self.photo)
+        super().save(*args, **kwargs)
 
     def get_skills_list(self):
         if self.skills:
@@ -208,6 +266,8 @@ class Service(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title)
+        _optimize_image_field(self.cover_image)
+        _optimize_image_field(self.og_image)
         super().save(*args, **kwargs)
 
     def get_features_list(self):

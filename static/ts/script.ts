@@ -36,6 +36,7 @@ class OnionApp {
         this.setupTypingEffect();
         this.setupTestimonialSlider();
         this.setupScrollAnimations();
+        this.setupSecureEmails();
     }
 
     private cacheElements(): void {
@@ -337,6 +338,39 @@ class OnionApp {
         }, { threshold: 0.15 });
 
         revealElements.forEach(el => revealOnScroll.observe(el));
+    }
+
+    /**
+     * Decode and render obfuscated email addresses safely in DOM to prevent bots scraping
+     */
+    private setupSecureEmails(): void {
+        const secureEmails = document.querySelectorAll(".secure-email");
+        secureEmails.forEach(el => {
+            const htmlEl = el as HTMLElement;
+            const u = htmlEl.dataset.u;
+            const d = htmlEl.dataset.d;
+            if (u && d) {
+                try {
+                    const decodedUser = atob(u);
+                    const decodedDomain = atob(d);
+                    const fullEmail = `${decodedUser}@${decodedDomain}`;
+                    
+                    if (htmlEl.tagName === "A") {
+                        const anchor = htmlEl as HTMLAnchorElement;
+                        anchor.href = `mailto:${fullEmail}`;
+                        
+                        // If link has a default template placeholder/email, update text too
+                        if (anchor.textContent && (anchor.textContent.trim() === "Loading email..." || anchor.textContent.trim().includes("info@oniontechs.com"))) {
+                            anchor.textContent = fullEmail;
+                        }
+                    } else {
+                        htmlEl.textContent = fullEmail;
+                    }
+                } catch (e) {
+                    console.error("Failed to decode secure email", e);
+                }
+            }
+        });
     }
 }
 

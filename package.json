@@ -1,0 +1,12 @@
+{
+  "name": "onion",
+  "version": "1.0.0",
+  "description": "Onion Techs Frontend & Backend",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

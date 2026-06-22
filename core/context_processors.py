@@ -1,10 +1,10 @@
-from .models import PageSEO
-
+from .models import PageSEO, SiteSettings
 
 def seo_context(request):
     """
     Resolves current page's SEO record from URL name and
     injects it into the template context as `seo`.
+    Also injects global `site_settings`.
     """
     try:
         url_name = getattr(request.resolver_match, 'url_name', None)
@@ -25,4 +25,21 @@ def seo_context(request):
     except Exception:
         seo = None
 
-    return {'seo': seo}
+    import base64
+    site_settings = SiteSettings.objects.first()
+    email = site_settings.email if site_settings and site_settings.email else "info@oniontechs.com"
+    
+    try:
+        u, d = email.split('@')
+        email_u = base64.b64encode(u.encode('utf-8')).decode('utf-8')
+        email_d = base64.b64encode(d.encode('utf-8')).decode('utf-8')
+    except Exception:
+        email_u = base64.b64encode(b"info").decode('utf-8')
+        email_d = base64.b64encode(b"oniontechs.com").decode('utf-8')
+
+    return {
+        'seo': seo,
+        'site_settings': site_settings,
+        'email_u': email_u,
+        'email_d': email_d,
+    }

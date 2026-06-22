@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import PageSEO, TeamMember, JobOpening, Service
+from .models import PageSEO, TeamMember, JobOpening, Service, SiteSettings
 
 
 # ──────────────────────────────────────────────────────────────────
@@ -9,6 +9,18 @@ from .models import PageSEO, TeamMember, JobOpening, Service
 admin.site.site_header = 'Onion Techs Admin'
 admin.site.site_title  = 'Onion Techs'
 admin.site.index_title = 'Onion Techs Control Panel'
+
+
+# ══════════════════════════════════════════════════════════════════
+# SITE SETTINGS ADMIN
+# ══════════════════════════════════════════════════════════════════
+@admin.register(SiteSettings)
+class SiteSettingsAdmin(admin.ModelAdmin):
+    def has_add_permission(self, request):
+        # Only allow 1 instance
+        if SiteSettings.objects.exists():
+            return False
+        return super().has_add_permission(request)
 
 
 # ══════════════════════════════════════════════════════════════════
